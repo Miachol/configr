@@ -1,0 +1,10 @@
+# This is a TOML document. Jianfeng.
+
+title = "TOML Example"
+
+[default]
+debug = "{{debug}} {{debug2}}"
+
+[comments]
+version = "0.2.0"
+test_parse = "{{key:test_parse}} {{key:test_parse2}}"

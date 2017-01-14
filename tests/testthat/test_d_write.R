@@ -1,0 +1,27 @@
+config.json <- system.file('extdata', 'config.json', package='configr')
+config.yaml <- system.file('extdata', 'config.yaml', package='configr')
+config.ini <- system.file('extdata', 'config.ini', package='configr')
+
+cat("###########################################################", sep = "\n")
+cat("##############  [Debug] write.config  #######################", sep = "\n")
+cat("###########################################################", sep = "\n")
+cat("[Debug]:write.config(list(a=c(123,b=list(456))), sprintf('%s/test.yaml',tempdir()), write.type = 'yaml')", sep = "\n")
+list.test <- list(a=c(c=123,b=list(456)))
+out.fn <- sprintf("%s/test.yaml", tempdir())
+print(write.config(list.test, out.fn, write.type = "yaml"))
+
+cat("[Debug]:write.config(list(a=c(123,b=list(456))), sprintf('%s/test.ini',tempdir()), write.type = 'ini')", sep = "\n")
+list.test <- list(a=c(c=123,b=list(456)))
+out.fn <- sprintf("%s/test.ini", tempdir())
+print(write.config(list.test, out.fn, write.type = "ini"))
+
+cat("[Debug]:write.config(list(a=c(123,b=list(456))), sprintf('%s/test.json',tempdir()), write.type = 'json')", sep = "\n")
+list.test <- list(a=c(c=123,b=list(456)))
+out.fn <- sprintf("%s/test.json", tempdir())
+print(write.config(list.test, out.fn, write.type = "json"))
+
+cat("[Debug]:write.config(NULL, sprintf('%s/test.yaml',tempdir()), write.type = 'yaml')", sep = "\n")
+out.fn <- sprintf("%s/test.yaml", tempdir())
+print(suppressWarnings(write.config(NULL, out.fn, write.type = "yaml")))
+cat("###########  END write.config [Debug] end line END ###################", sep = "\n")
+cat("\n\n")

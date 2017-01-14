@@ -1,0 +1,5 @@
+key:
+    test_parse: 123
+    test_parse2: 234
+samtools@1.3.1:
+    source_dir: /tmp

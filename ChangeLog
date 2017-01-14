@@ -1,0 +1,71 @@
+2017-04-30 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* {{key@}} can be recognition
+		* Rename eval.config.groups to eval.config.sections
+		* eval.config.merge parameter groups change to sections
+
+2017-04-10 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* Add EOF flag when write a JSON format configuration file
+
+2017-03-23 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* %'% in configuration when rcmd.parse=TRUE, can be parsed to double
+		quote that can to avoid double quote escape which can raise error
+
+2017-03-17 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+		
+		* 0.2.1 release
+		* '@>@ R statement @<@' in config can be paresed in parse.extra(rcmd.parse =
+		TRUE)
+		* Fix mulitple var parse in parse.R parse.config
+
+2017-03-09 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* 0.2.0 release
+		* Add parse.extra example in read.config and eval.config
+
+2017-03-07 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+		
+		* Add parse.extra function in R/parse.R
+		* Import stringr
+		* Change tests output format
+
+2017-02-14 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* Use RcppTOML 0.1.1
+
+2017-02-04 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* Cancel import config package
+
+2017-01-29 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* Cancel import stringr package
+
+2017-01-22 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+		
+		* Cancel import futile.logger package
+
+2017-01-20 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* Add is.configfile.active/is.config.active in R/active.R
+		* Change the default paramerter of configuration file to
+		Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg")
+
+2017-01-19 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+		
+		* json.file.debug/ini.file.debug/yaml.file.debug/toml.file.debug be 
+		added in is.*.file function family that can show the error message
+		of the configuration file, which can be used in 'configr' most other function
+		* Add config.error.json/config.error.yaml/config.error.ini/config.error.toml
+		in inst/extdata as the test file that all of them have be modified as
+		non-standard format(JSON/INI/YAML/TOML) configuration files
+		* Add additional tests for code coverage
+		* Rename inst/config.yml to inst/config.yaml
+
+2017-01-17 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* Add TOML parse (RcppTOML)
+		* Add convert.config function in R/convert.R
+		* Use '...' as the parameter rather than 'encoding' only

@@ -1,0 +1,26 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+language: R
+
+sudo: required
+
+cache: packages
+
+dist: trusty
+
+before_install:
+  - curl -OLs http://eddelbuettel.github.io/r-travis/run.sh && chmod 0755 run.sh
+  # optionally add our launchpad repo, but not needed here
+  # - sudo add-apt-repository -y ppa:edd/misc
+  - Rscript -e 'install.packages(c("covr", "devtools", "roxygen2", "testthat", "jsonlite", "ini", "yaml", "RcppTOML"))'
+  - ./run.sh bootstrap
+
+install:
+  - ./run.sh install_aptget r-cran-rcpp
+  - Rscript -e 'library("devtools");install_github("Miachol/configr")'
+
+after_failure:
+  - ./run.sh dump_logs
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - Rscript -e 'library("covr"); covr::codecov()'

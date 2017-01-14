@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^.*\.Rbuildignore$
+^\.Rproj\.user$
+^.*\.test
+^data-raw$
+.travis.yml
+
