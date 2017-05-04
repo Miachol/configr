@@ -23,6 +23,8 @@ cat("[Debug]: parse.extra.rcmd(config)", sep = "\n")
 print(parse.extra.rcmd(config))
 cat("[Debug]: read.config(config.json, other.config = other.config, rcmd.parse = T)", sep = "\n")
 print(read.config(config.json, other.config = other.config, rcmd.parse = T))
+cat("[Debug]: read.config(config.toml, extra.list=list('curl:install.dir'='/curl/path'), other.config = other.config, rcmd.parse = T)$rcmd$linux", sep = "\n")
+print(read.config(config.toml, extra.list=list('curl:install.dir'='/curl/path'), other.config = other.config, rcmd.parse = T)$rcmd$linux)
 
 
 cat("###########  END parse module [Debug] end line END ###################", sep = "\n")

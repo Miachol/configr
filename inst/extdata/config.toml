@@ -8,3 +8,19 @@ debug = "{{debug}} {{debug2}}"
 [comments]
 version = "0.2.0"
 test_parse = "{{key:test_parse}} {{key:test_parse2}}"
+
+[rcmd]
+linux = ["""./configure --enable-R-shlib --prefix={{destdir}} CFLAGS='\
+@>@
+library(stringr)
+include.flag <- unique(c('-I/{{key:test_parse}}/include', '-I{{bzip2:install.dir}}/include', '-I{{xz:install.dir}}/include', '-I{{pcre:install.dir}}/include', '-I{{curl:install.dir}}/include'))
+include.flag <- include.flag[!str_detect(include.flag, ':')]
+paste(include.flag, collapse=' ')
+@<@' \
+LDFLAGS='\
+@>@
+lib.flag <- unique(c('-I{{zlib:install.dir}}/lib', '-I{{bzip2:install.dir}}/lib', '-I/{{key:test_parse2}}/lib', '-I{{pcre:install.dir}}/lib', '-I{{curl:install.dir}}/lib'))
+lib.flag <- lib.flag[!str_detect(lib.flag, ':')]
+paste(lib.flag, collapse=' ')
+@<@' && make""", "make install"]
+

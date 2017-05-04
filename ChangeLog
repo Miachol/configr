@@ -1,3 +1,9 @@
+2017-05-07 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* Add a more complicated example in inst/extdata/config.toml
+		* rcmd.parse becoming more user friendly in TOML configuration file
+		* {{key:value}} can be paresed by extra.list eg. extra.list=list('key:value'=123)
+
 2017-04-30 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 
 		* {{key@}} can be recognition

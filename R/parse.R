@@ -11,6 +11,9 @@
 #' config <- read.config(config.json)
 #' parse.extra(config, list(debug = 'TRUE'))
 parse.extra <- function(config, extra.list = list(), other.config = "", rcmd.parse = FALSE) {
+  if (length(config) == 0) {
+    return(config)
+  }
   if (!is.null(names(extra.list))) {
     config <- parse.extra.list(config, extra.list)
   }
@@ -38,9 +41,6 @@ parse.extra.list <- function(config, extra.list) {
       }
       text <- str.extract.var(list.tmp)
       for (item in text) {
-        if (str_detect(item, ":")) {
-          next
-        }
         if (!item %in% names(args.all)) {
           next
         }
@@ -160,6 +160,9 @@ parse.extra.rcmd.nonlist <- function(config, list.item, text.nonlist) {
   for (text.raw in text.nonlist) {
     text.cmd <- str_replace_all(text.raw, "@>@|@<@", "")
     text.cmd <- str_replace_all(text.cmd, "%'%", "\"")
+    text.cmd <- str_split(text.cmd, fixed("\\n"))[[1]]
+    text.cmd <- text.cmd[!str_detect(text.cmd, "^[ ]*$")]
+    text.cmd <- str_replace_all(text.cmd, fixed("\\n"), "")
     cmd.value <- eval(parse(text = text.cmd))
     config[[list.item]] <- str_replace_all(config[[list.item]], fixed(text.raw), 
       cmd.value)
