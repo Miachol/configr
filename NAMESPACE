@@ -3,7 +3,6 @@
 export(config.list.merge)
 export(convert.config)
 export(eval.config)
-export(eval.config.groups)
 export(eval.config.merge)
 export(eval.config.sections)
 export(get.config.type)

@@ -1,27 +1,20 @@
-config.json <- system.file('extdata', 'config.json', package='configr')
-config.yaml <- system.file('extdata', 'config.yaml', package='configr')
-config.ini <- system.file('extdata', 'config.ini', package='configr')
+test_that("write.config Function", {
+  config.opts <- c("json", "ini", "yaml")
+  list.test <- list(a = c(c = 123, b = list(456)))
+  for (i in config.opts) {
+    out.fn <- sprintf("%s/test.%s", tempdir(), i)
+    x <- NULL
+    x <- write.config(list.test, out.fn, write.type = i)
+    expect_that(x, equals(TRUE))
+    expect_that(get.config.type(out.fn), equals(i))
+  }
+})
 
-cat("###########################################################", sep = "\n")
-cat("##############  [Debug] write.config  #######################", sep = "\n")
-cat("###########################################################", sep = "\n")
-cat("[Debug]:write.config(list(a=c(123,b=list(456))), sprintf('%s/test.yaml',tempdir()), write.type = 'yaml')", sep = "\n")
-list.test <- list(a=c(c=123,b=list(456)))
-out.fn <- sprintf("%s/test.yaml", tempdir())
-print(write.config(list.test, out.fn, write.type = "yaml"))
-
-cat("[Debug]:write.config(list(a=c(123,b=list(456))), sprintf('%s/test.ini',tempdir()), write.type = 'ini')", sep = "\n")
-list.test <- list(a=c(c=123,b=list(456)))
-out.fn <- sprintf("%s/test.ini", tempdir())
-print(write.config(list.test, out.fn, write.type = "ini"))
-
-cat("[Debug]:write.config(list(a=c(123,b=list(456))), sprintf('%s/test.json',tempdir()), write.type = 'json')", sep = "\n")
-list.test <- list(a=c(c=123,b=list(456)))
-out.fn <- sprintf("%s/test.json", tempdir())
-print(write.config(list.test, out.fn, write.type = "json"))
-
-cat("[Debug]:write.config(NULL, sprintf('%s/test.yaml',tempdir()), write.type = 'yaml')", sep = "\n")
-out.fn <- sprintf("%s/test.yaml", tempdir())
-print(suppressWarnings(write.config(NULL, out.fn, write.type = "yaml")))
-cat("###########  END write.config [Debug] end line END ###################", sep = "\n")
-cat("\n\n")
+test_that("write.config Exception Handling", {
+  config.opts <- c("json", "ini", "yaml")
+  for (i in config.opts) {
+    out.fn <- sprintf("%s/test.%s", tempdir(), i)
+    suppressWarnings(x <- write.config(NULL, out.fn, write.type = i))
+    expect_that(x, equals(FALSE))
+  }
+})

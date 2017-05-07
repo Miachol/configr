@@ -1,11 +1,18 @@
-cat("###########################################################", sep = "\n")
-cat("##############  [Debug] convert.config  #####################", sep = "\n")
-cat("###########################################################", sep = "\n")
+config.json <- system.file("extdata", "config.json", package = "configr")
+config.yaml <- system.file("extdata", "config.yaml", package = "configr")
+config.ini <- system.file("extdata", "config.ini", package = "configr")
+config.toml <- system.file("extdata", "config.toml", package = "configr")
 
-config.json <- system.file('extdata', 'config.json', package='configr')
-out.file <- sprintf("%s/config.ini", tempdir()) 
-cat(sprintf("[Debug]:convert.config(file = '%s', out.file = '%s').", config.json, out.file))
-print(convert.config(file=config.json, out.file = out.file))
-
-cat("###########  END convert.config [Debug] end line END ###################", sep = "\n")
-cat("\n\n")
+test_that("convert.config Function", {
+  config.opts <- c("json", "ini", "yaml", "toml")
+  for (i in config.opts) {
+    for (j in config.opts[!config.opts %in% c(i, "toml")]) {
+      out.fn <- sprintf("%s/test.convert.%s", tempdir(), j)
+      rcmd.text <- sprintf("x <- convert.config(file = config.%s, out.file = \"%s\", convert.to = \"%s\")", 
+        i, out.fn, j)
+      eval(parse(text = rcmd.text))
+      expect_that(x, equals(TRUE))
+      expect_that(get.config.type(out.fn), equals(j))
+    }
+  }
+})

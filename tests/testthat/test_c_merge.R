@@ -1,53 +1,36 @@
-config.json <- system.file('extdata', 'config.json', package='configr')
-config.yaml <- system.file('extdata', 'config.yaml', package='configr')
-config.ini <- system.file('extdata', 'config.ini', package='configr')
-config.toml <- system.file('extdata', 'config.toml', package='configr')
-config.error.toml <- system.file('extdata', 'config.error.toml', package='configr')
+config.json <- system.file("extdata", "config.json", package = "configr")
+config.yaml <- system.file("extdata", "config.yaml", package = "configr")
+config.ini <- system.file("extdata", "config.ini", package = "configr")
+config.toml <- system.file("extdata", "config.toml", package = "configr")
+config.error.toml <- system.file("extdata", "config.error.toml", package = "configr")
 
-cat("###########################################################", sep = "\n")
-cat("##############  [Debug] eval.config.merge  ##################", sep = "\n")
-cat("###########################################################", sep = "\n")
-cat("[Debug]:config.list.merge(list(a=c(123,123),b=c(4,5,6),list(c=c(2,3,4))))", sep = "\n")
-list.left <- list(a=c(123,123), b=c(4,5,6))
-list.right <- list(c=c(2,3,4))
-print(config.list.merge(list.left, list.right))
+test_that("config.list.merge Function", {
+  list.left <- list(a = c(123, 123), b = c(4, 5, 6))
+  list.right <- list(c = c(2, 3, 4))
+  x <- config.list.merge(list.left, list.right)
+  expect_that(x, equals(list(a = c(123, 123), b = c(4, 5, 6), c = c(2, 3, 4))))
+})
 
-cat("[Debug]:eval.config.merge(file=config.json)", sep = "\n")
-print(eval.config.merge(config.json))
-cat("[Debug]:eval.config.merge(file=config.yaml)", sep = "\n")
-print(eval.config.merge(config.yaml))
-cat("[Debug]:eval.config.merge(file=config.ini)", sep = "\n")
-print(eval.config.merge(config.ini))
-cat("[Debug]:eval.config.merge(file=config.toml)", sep = "\n")
-print(eval.config.merge(config.toml))
+test_that("eval.config.merge Function", {
+  config.opts <- c("json", "ini", "yaml", "toml")
+  for (i in config.opts) {
+    x <- NULL
+    rcmd.text <- sprintf("x <- eval.config.merge(file = config.%s)", i)
+    eval(parse(text = rcmd.text))
+    expect_that(is.list(x) && length(x) > 1, equals(TRUE))
+    rcmd.text <- sprintf("x <- eval.config.merge(file = config.%s, sections = \"comments\")", 
+      i)
+    eval(parse(text = rcmd.text))
+    expect_that(is.list(x) && length(x) == 5, equals(TRUE))
+    
+    rcmd.text <- sprintf("x <- eval.config.merge(file = config.%s, sections = c(\"default\", \"comments\"))", 
+      i)
+    eval(parse(text = rcmd.text))
+    expect_that(is.list(x) && length(x) == 7, equals(TRUE))
+  }
+})
 
-cat("[Debug]:eval.config.merge(file=config.json, 'comments')", sep = "\n")
-print(eval.config.merge(config.json, "comments"))
-cat("[Debug]:eval.config.merge(file=config.yaml,' comments')", sep = "\n")
-print(eval.config.merge(config.yaml, "comments"))
-cat("[Debug]:eval.config.merge(file=config.ini, 'comments')", sep = "\n")
-print(eval.config.merge(config.ini, "comments"))
-cat("[Debug]:eval.config.merge(file=config.toml, 'comments')", sep = "\n")
-print(eval.config.merge(config.toml, "comments"))
-
-cat("[Debug]:eval.config.merge(file=config.json, c('default', 'comments'))", sep = "\n")
-print(eval.config.merge(config.json, c("default", "comments")))
-cat("[Debug]:eval.config.merge(file=config.yaml, c('default', 'comments'))", sep = "\n")
-print(eval.config.merge(config.yaml, c("default", "comments")))
-cat("[Debug]:eval.config.merge(file=config.ini, c('default', 'comments'))", sep = "\n")
-print(eval.config.merge(config.ini, c("default", "comments")))
-cat("[Debug]:eval.config.merge(file=config.toml, c('default', 'comments'))", sep = "\n")
-print(eval.config.merge(config.toml, c("default", "comments")))
-
-
-cat("[Debug]:eval.config.merge(file='unknow', c('default', 'comments'))", sep = "\n")
-print(suppressWarnings(eval.config.merge('unknow', c("default", "comments"))))
-
-cat("[Debug]:eval.config.merge(file=config.toml, c('title','default', 'comments'))", sep = "\n")
-print(eval.config.merge(file=config.toml, c('title','default', 'comments')))
-
-cat("[Debug]:config.list.merge('','')", sep = "\n")
-print(suppressWarnings(config.list.merge('','')))
-
-cat("###########  END eval.config.merge [Debug] end line END ###################", sep = "\n")
-cat("\n\n")
+test_that("eval.configmerge Exception Handling", {
+  suppressWarnings(x <- eval.config.merge("unknow", c("default", "comments")))
+  expect_that(x, equals(FALSE))
+})

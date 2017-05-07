@@ -1,92 +1,85 @@
-config.json <- system.file('extdata', 'config.json', package='configr')
-config.yaml <- system.file('extdata', 'config.yaml', package='configr')
-config.ini <- system.file('extdata', 'config.ini', package='configr')
-config.toml <- system.file('extdata', 'config.toml', package='configr')
-config.error.toml <- system.file('extdata', 'config.error.toml', package='configr')
-cat("###########################################################", sep = "\n")
-cat("##############  [Debug] read.config  ########################", sep = "\n")
-cat("###########################################################", sep = "\n")
+config.json <- system.file("extdata", "config.json", package = "configr")
+config.yaml <- system.file("extdata", "config.yaml", package = "configr")
+config.ini <- system.file("extdata", "config.ini", package = "configr")
+config.toml <- system.file("extdata", "config.toml", package = "configr")
+config.error.toml <- system.file("extdata", "config.error.toml", package = "configr")
 
-cat("[Debug]:read.config(config.json)", sep = "\n")
-print(read.config(config.json))
-cat("[Debug]:read.config(config.yaml)", sep = "\n")
-print(read.config(config.yaml))
-cat("[Debug]:read.config(config.ini)", sep = "\n")
-print(read.config(config.ini))
-cat("[Debug]:read.config(config.toml)", sep = "\n")
-print(read.config(config.toml))
-cat("[Debug]:read.config(config.json, extra.list = list(debug = 'TRUE'))", sep = "\n")
-print(read.config(config.json, extra.list = list(debug = "TRUE")))
-cat("[Debug]:read.config(config.yaml, extra.list = list(debug = 'TRUE'))", sep = "\n")
-print(read.config(config.yaml, extra.list = list(debug = "TRUE")))
-cat("[Debug]:read.config(config.ini, extra.list = list(debug = 'TRUE'))", sep = "\n")
-print(read.config(config.ini, extra.list = list(debug ="TRUE")))
-cat("[Debug]:read.config(config.toml, extra.list = list(debug = 'TRUE'))", sep = "\n")
-print(read.config(config.toml, extra.list = list(debug = "TRUE")))
+test_that("read.config Function", {
+  config.opts <- c("json", "ini", "yaml", "toml")
+  for (i in config.opts) {
+    x <- NULL
+    rcmd.text <- sprintf("x <- read.config(config.%s)", i)
+    eval(parse(text = rcmd.text))
+    expect_that(is.list(x) && length(x) > 1, equals(TRUE))
+  }
+})
 
-cat("###########  END read.config [Debug] end line END ###################", sep = "\n")
-cat("\n\n")
+test_that("read.config using extra.list parse", {
+  config.opts <- c("json", "ini", "yaml", "toml")
+  for (i in config.opts) {
+    x <- NULL
+    rcmd.text <- sprintf("x <- read.config(config.%s, extra.list = list(debug = \"TRUE\"))", 
+      i)
+    eval(parse(text = rcmd.text))
+    expect_that(is.list(x) && length(x) > 1, equals(TRUE))
+    parsed.value <- x$default$debug
+    expect_that(parsed.value, equals("TRUE {{debug2}}"))
+  }
+})
 
-cat("###########################################################", sep = "\n")
-cat("##############  [Debug] eval.config  ########################", sep = "\n")
-cat("###########################################################", sep = "\n")
-cat("[Debug]:eval.config(file=config.json)", sep = "\n")
-print(eval.config(file = config.json))
-cat("[Debug]:eval.config(file=config.yaml)", sep = "\n")
-print(eval.config(file = config.yaml))
-cat("[Debug]:eval.config(file=config.ini)", sep = "\n")
-print(eval.config(file = config.ini))
-cat("[Debug]:eval.config(file=config.toml)", sep = "\n")
-print(eval.config(file = config.toml))
+test_that("eval.config Function", {
+  config.opts <- c("json", "ini", "yaml", "toml")
+  for (i in config.opts) {
+    x <- NULL
+    rcmd.text <- sprintf("config.path <- config.%s; x <- eval.config(file = config.%s)", 
+      i, i)
+    eval(parse(text = rcmd.text))
+    expect_that(is.list(x) && length(x) > 1, equals(TRUE))
+    expect_that(attributes(x)$config, equals("default"))
+    expect_that(attributes(x)$configtype, equals(i))
+    file.attr <- attributes(x)$file
+    expect_that(is.character(file.attr), equals(TRUE))
+    expect_that(file.attr, equals(config.path))
+  }
+})
 
-cat("[Debug]:eval.config.groups(file=config.json)", sep = "\n")
-print(eval.config.groups(file = config.json))
-cat("[Debug]:eval.config.groups(file=config.yaml)", sep = "\n")
-print(eval.config.groups(file = config.yaml))
-cat("[Debug]:eval.config.groups(file=config.ini)", sep = "\n")
-print(eval.config.groups(file = config.ini))
-cat("[Debug]:eval.config.groups(file=config.toml)", sep = "\n")
-print(eval.config.groups(file = config.toml))
+test_that("eval.config using extra.list parse", {
+  config.opts <- c("json", "ini", "yaml", "toml")
+  for (i in config.opts) {
+    x <- NULL
+    rcmd.text <- sprintf("x <- eval.config(file = config.%s, extra.list = list(debug = \"TRUE\"))", 
+      i)
+    eval(parse(text = rcmd.text))
+    expect_that(is.list(x) && length(x) > 1, equals(TRUE))
+    parsed.value <- x$debug
+    expect_that(parsed.value, equals("TRUE {{debug2}}"))
+  }
+})
 
-cat("[Debug]:eval.config.sections(file=config.json)", sep = "\n")
-print(eval.config.sections(file = config.json))
-cat("[Debug]:eval.config.sections(file=config.yaml)", sep = "\n")
-print(eval.config.sections(file = config.yaml))
-cat("[Debug]:eval.config.sections(file=config.ini)", sep = "\n")
-print(eval.config.sections(file = config.ini))
-cat("[Debug]:eval.config.sections(file=config.toml)", sep = "\n")
-print(eval.config.sections(file = config.toml))
+test_that("eval.config.sections Function", {
+  config.opts <- c("json", "ini", "yaml", "toml")
+  for (i in config.opts) {
+    x <- NULL
+    rcmd.text <- sprintf("x <- eval.config.sections(file = config.%s)", i)
+    eval(parse(text = rcmd.text))
+    expect_that(length(x) > 1, equals(TRUE))
+    expect_that("default" %in% x, equals(TRUE))
+  }
+})
 
-cat("[Debug]:eval.config(file = config.json, extra.list = list(debug = 'TRUE'))", sep = "\n")
-print(eval.config(file = config.json, extra.list = list(debug = "TRUE")))
-cat("[Debug]:eval.config(file = config.yaml, extra.list = list(debug = 'TRUE'))", sep = "\n")
-print(eval.config(file = config.yaml, extra.list = list(debug = "TRUE")))
-cat("[Debug]:eval.config(file = config.ini, extra.list = list(debug = 'TRUE'))", sep = "\n")
-print(eval.config(file = config.ini, extra.list = list(debug = "TRUE")))
-cat("[Debug]:eval.config(file = config.toml, extra.list = list(debug = 'TRUE'))", sep = "\n")
-print(eval.config(file = config.toml, extra.list = list(debug = "TRUE")))
-
-cat("###########  END eval.config [Debug] end line END ###################", sep = "\n")
-cat("\n\n")
-
-cat("###########################################################", sep = "\n")
-cat("###  [Debug] eval.config on unsuitable format file  #########", sep = "\n")
-cat("###########################################################", sep = "\n")
-# Test process fail format file
-cat("[Debug]:read.config(file='unknow')", sep = "\n")
-print(suppressWarnings(read.config(file = 'unknow')))
-cat("[Debug]:read.config(file=config.error.toml)", sep = "\n")
-print(suppressWarnings(read.config(file = config.error.toml)))
-
-cat("[Debug]:eval.config.groups(file='unknow')", sep = "\n")
-print(suppressWarnings(eval.config.groups(file = 'unknow')))
-cat("[Debug]:eval.config.groups(file=config.error.toml)", sep = "\n")
-print(suppressWarnings(eval.config.groups(file = config.error.toml)))
-
-cat("[Debug]:eval.config(file='unknow')", sep = "\n")
-print(suppressWarnings(eval.config(file = 'unknow')))
-cat("[Debug]:eval.config(file=config.error.toml)", sep = "\n")
-print(suppressWarnings(eval.config(file = config.error.toml)))
-
-cat("###########  END Unsuitable format file END ###################", sep = "\n")
-cat("\n\n")
+test_that("eval.config and eval.config.sections Exception Handling", {
+  suppressWarnings(x <- read.config(file = "unknow"))
+  expect_that(x, equals(FALSE))
+  suppressWarnings(x <- read.config(file = config.error.toml))
+  expect_that(x, equals(FALSE))
+  suppressWarnings(x <- read.config(file = config.error.toml))
+  expect_that(x, equals(FALSE))
+  suppressWarnings(x <- eval.config(file = "unknow"))
+  expect_that(x, equals(FALSE))
+  suppressWarnings(x <- eval.config(file = config.error.toml))
+  expect_that(x, equals(FALSE))
+  suppressWarnings(x <- eval.config.sections(file = "unknow"))
+  expect_that(x, equals(FALSE))
+  suppressWarnings(x <- eval.config.sections(file = config.error.toml))
+  expect_that(x, equals(FALSE))
+})
