@@ -5,7 +5,7 @@ get.config.value <- function(file = "", value = NULL, config = "", config.list =
     config.list <- config.list[[config]]
     attr(config.list, "config") <- config
     attr(config.list, "configtype") <- get.config.type(file, ...)
-    attr(config.list, "file") <- normalizePath(file, mustWork = FALSE)
+    attr(config.list, "file") <- normalizePath(file, "/", mustWork = FALSE)
   } else {
     config.list <- config.list[[config]][[value]]
   }

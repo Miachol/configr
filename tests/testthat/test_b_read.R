@@ -3,13 +3,12 @@ config.yaml <- system.file("extdata", "config.yaml", package = "configr")
 config.ini <- system.file("extdata", "config.ini", package = "configr")
 config.toml <- system.file("extdata", "config.toml", package = "configr")
 config.error.toml <- system.file("extdata", "config.error.toml", package = "configr")
+config.list <- list(json = config.json, yaml = config.yaml, ini = config.ini, toml = config.toml)
 
 test_that("read.config Function", {
   config.opts <- c("json", "ini", "yaml", "toml")
   for (i in config.opts) {
-    x <- NULL
-    rcmd.text <- sprintf("x <- read.config(config.%s)", i)
-    eval(parse(text = rcmd.text))
+    x <- read.config(config.list[[i]])
     expect_that(is.list(x) && length(x) >= 1, equals(TRUE))
   }
 })
@@ -17,10 +16,7 @@ test_that("read.config Function", {
 test_that("read.config using extra.list parse", {
   config.opts <- c("json", "ini", "yaml", "toml")
   for (i in config.opts) {
-    x <- NULL
-    rcmd.text <- sprintf("x <- read.config(config.%s, extra.list = list(debug = \"TRUE\"))", 
-      i)
-    eval(parse(text = rcmd.text))
+    x <- read.config(config.list[[i]], extra.list = list(debug = "TRUE"))
     expect_that(is.list(x) && length(x) >= 1, equals(TRUE))
     parsed.value <- x$default$debug
     expect_that(parsed.value, equals("TRUE {{debug2}}"))
@@ -30,26 +26,20 @@ test_that("read.config using extra.list parse", {
 test_that("eval.config Function", {
   config.opts <- c("json", "ini", "yaml", "toml")
   for (i in config.opts) {
-    x <- NULL
-    rcmd.text <- sprintf("config.path <- config.%s; x <- eval.config(file = config.%s)", 
-      i, i)
-    eval(parse(text = rcmd.text))
+    x <- eval.config(file = config.list[[i]])
     expect_that(is.list(x) && length(x) >= 1, equals(TRUE))
     expect_that(attributes(x)$config, equals("default"))
     expect_that(attributes(x)$configtype, equals(i))
     file.attr <- attributes(x)$file
     expect_that(is.character(file.attr), equals(TRUE))
-    expect_that(file.attr, equals(config.path))
+    expect_that(file.attr, equals(config.list[[i]]))
   }
 })
 
 test_that("eval.config using extra.list parse", {
   config.opts <- c("json", "ini", "yaml", "toml")
   for (i in config.opts) {
-    x <- NULL
-    rcmd.text <- sprintf("x <- eval.config(file = config.%s, extra.list = list(debug = \"TRUE\"))", 
-      i)
-    eval(parse(text = rcmd.text))
+    x <- eval.config(file = config.list[[i]], extra.list = list(debug = "TRUE"))
     expect_that(is.list(x) && length(x) >= 1, equals(TRUE))
     parsed.value <- x$debug
     expect_that(parsed.value, equals("TRUE {{debug2}}"))
@@ -59,9 +49,7 @@ test_that("eval.config using extra.list parse", {
 test_that("eval.config.sections Function", {
   config.opts <- c("json", "ini", "yaml", "toml")
   for (i in config.opts) {
-    x <- NULL
-    rcmd.text <- sprintf("x <- eval.config.sections(file = config.%s)", i)
-    eval(parse(text = rcmd.text))
+    x <- eval.config.sections(config.list[[i]])
     expect_that(length(x) > 1, equals(TRUE))
     expect_that("default" %in% x, equals(TRUE))
   }
