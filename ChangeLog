@@ -1,3 +1,7 @@
+2017-05-23 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* Add file.type parameter in read.config function
+
 2017-05-07 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 
 		* Add a more complicated example in inst/extdata/config.toml

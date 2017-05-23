@@ -7,6 +7,8 @@
 #' and {{debug}} will be setted to 'TRUE'
 #' @param other.config Path of another configuration file that can replace the configuration file '{{key:value}}' 
 #' @param rcmd.parse Logical wheather parse '@>@str_replace('abc', 'b', 'c')@<@' that existed in config to 'acc'
+#' @param file.type Default is no need to specify the variable, file.type will be automatically 
+#' identify by \code{\link{get.config.type}}. If the value be specified, the step of filetype identification will be skipped.
 #' @param ... Arguments for \code{\link{get.config.type}}, 
 #' \code{\link[jsonlite]{fromJSON}}, \code{\link[ini]{read.ini}},
 #' \code{\link[yaml]{yaml.load_file}}, \code{\link[RcppTOML]{parseTOML}}, 
@@ -29,12 +31,14 @@
 #' other.config <- system.file('extdata', 'config.other.yaml', package='configr')
 #' config.extra.parsed.2 <- read.config(config.json, list(debug = 'TRUE'), other.config)
 read.config <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), extra.list = list(), 
-  other.config = "", rcmd.parse = FALSE, ...) {
+  other.config = "", rcmd.parse = FALSE, file.type = NULL, ...) {
   status <- check.file.parameter(file)
   if (status == FALSE) {
     return(FALSE)
   }
-  file.type <- get.config.type(file = file, ...)
+  if (is.null(file.type)) {
+    file.type <- get.config.type(file = file, ...)
+  }
   if (!is.character(file.type)) {
     return(FALSE)
   }
