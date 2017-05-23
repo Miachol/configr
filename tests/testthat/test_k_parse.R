@@ -27,8 +27,8 @@ for (i in c("ini", "json", "toml", "yaml")) {
   x <- str_split(x$mulitple_parse$raw, ", ")[[1]]
   expect_that(x[1], equals("configr"))
   expect_that(x[5], equals("config"))
-  x <- parse.extra(config, list(debug = "TRUE", debug2 = "FALSE", yes = "1", no = "0"), other.config = other.config, 
-    rcmd.parse = T, bash.parse = T)
+  x <- parse.extra(config, list(debug = "TRUE", debug2 = "FALSE", yes = "1", no = "0"), 
+    other.config = other.config, rcmd.parse = T, bash.parse = T)
   expect_that(is.list(x), equals(TRUE))
   expect_that(x$default$debug, equals("TRUE FALSE"))
   expect_that(x$extra_list_parse$raw, equals("1"))
