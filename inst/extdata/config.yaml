@@ -1,11 +1,18 @@
 default:
   debug: '{{debug}} {{debug2}}'
-  test: '{{samtools@1.3.1:source_dir}}'
 comments:
-  version: 0.2.1
-  test_parse: '{{key:test_parse}} {{key:test_parse2}}'
-  test_parse2: '@>@ str_replace(''{{key:test_parse}}'', ''2'', ''00'')@<@ {{key:test_parse2}}
-    {{debug2}}'
-  test_parse3: '{{key:test_parse}}'
-  test_parse4: '@>@ str_replace(''{{key:test_parse2}}'', ''2'', ''00'')@<@ @>@ str_replace(''{{key:test_parse}}'',
-    ''2'', ''00'')@<@ {{key:test_parse2}} {{debug2}}'
+  version: 0.2.3
+extra_list_parse:
+  raw: '{{yes}}'
+  parsed: '1'
+other_config_parse:
+  raw: '{{key:yes_flag}} {{key:no_flag}}'
+  parsed: yes no
+rcmd_parse:
+  raw: '@>@ Sys.Date() @<@'
+bash_parse:
+  raw: "#>#echo bash#<#"
+  parsed: bash
+mulitple_parse:
+  raw: "@>@str_replace('config','g$','gr')@<@, #>#echo configr#<#, {{key:yes_flag}}, {{yes}}"
+  parsed: configr, configr, yes, 1

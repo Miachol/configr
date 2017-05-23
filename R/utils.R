@@ -177,3 +177,13 @@ list.merge <- function(base.list, overlay.list, recursive = TRUE) {
   }
 }
 
+str.extract.var <- function(text) {
+  text <- str_extract_all(text, "\\{\\{.*\\}\\}")
+  text <- str_extract_all(text, "\\{\\{[@a-zA-Z0-9_.:]*\\}\\}")
+  text <- lapply(text, function(x) str_replace_all(x, "\"", ""))
+  text <- lapply(text, function(x) str_replace_all(x, fixed("{{"), ""))
+  text <- lapply(text, function(x) str_split(x, fixed("}}")))
+  text <- unlist(text)
+  text <- text[text != ""]
+  text <- unique(text)
+}

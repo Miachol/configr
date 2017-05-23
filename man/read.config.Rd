@@ -5,7 +5,8 @@
 \title{Read from the file (JSON/INI/YAML/TOML be supported), retreiving all values as a list.}
 \usage{
 read.config(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
-  extra.list = list(), other.config = "", rcmd.parse = FALSE, ...)
+  extra.list = list(), other.config = "", rcmd.parse = FALSE,
+  file.type = NULL, ...)
 }
 \arguments{
 \item{file}{File name of configuration file to read from. Defaults to the value of
@@ -18,6 +19,9 @@ and {{debug}} will be setted to 'TRUE'}
 \item{other.config}{Path of another configuration file that can replace the configuration file '{{key:value}}'}
 
 \item{rcmd.parse}{Logical wheather parse '@>@str_replace('abc', 'b', 'c')@<@' that existed in config to 'acc'}
+
+\item{file.type}{Default is no need to specify the variable, file.type will be automatically 
+identify by \code{\link{get.config.type}}. If the value be specified, the step of filetype identification will be skipped.}
 
 \item{...}{Arguments for \code{\link{get.config.type}}, 
 \code{\link[jsonlite]{fromJSON}}, \code{\link[ini]{read.ini}},

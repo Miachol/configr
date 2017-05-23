@@ -17,16 +17,15 @@ test_that("eval.config.merge Function", {
     x <- NULL
     rcmd.text <- sprintf("x <- eval.config.merge(file = config.%s)", i)
     eval(parse(text = rcmd.text))
-    expect_that(is.list(x) && length(x) > 1, equals(TRUE))
+    expect_that(attributes(x)$config, equals(eval.config.sections(attributes(x)$file)))
     rcmd.text <- sprintf("x <- eval.config.merge(file = config.%s, sections = \"comments\")", 
       i)
     eval(parse(text = rcmd.text))
-    expect_that(is.list(x) && length(x) == 5, equals(TRUE))
-    
+    expect_that(attributes(x)$config, equals("comments"))
     rcmd.text <- sprintf("x <- eval.config.merge(file = config.%s, sections = c(\"default\", \"comments\"))", 
       i)
     eval(parse(text = rcmd.text))
-    expect_that(is.list(x) && length(x) == 7, equals(TRUE))
+    expect_that(attributes(x)$config, equals(c("default", "comments")))
   }
 })
 

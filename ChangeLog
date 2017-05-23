@@ -1,6 +1,7 @@
 2017-05-23 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 
 		* Add file.type parameter in read.config function
+		* bash.cmd.parse be supported (#># echo bash #<#)
 
 2017-05-07 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 

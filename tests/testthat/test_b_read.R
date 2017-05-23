@@ -10,7 +10,7 @@ test_that("read.config Function", {
     x <- NULL
     rcmd.text <- sprintf("x <- read.config(config.%s)", i)
     eval(parse(text = rcmd.text))
-    expect_that(is.list(x) && length(x) > 1, equals(TRUE))
+    expect_that(is.list(x) && length(x) >= 1, equals(TRUE))
   }
 })
 
@@ -21,7 +21,7 @@ test_that("read.config using extra.list parse", {
     rcmd.text <- sprintf("x <- read.config(config.%s, extra.list = list(debug = \"TRUE\"))", 
       i)
     eval(parse(text = rcmd.text))
-    expect_that(is.list(x) && length(x) > 1, equals(TRUE))
+    expect_that(is.list(x) && length(x) >= 1, equals(TRUE))
     parsed.value <- x$default$debug
     expect_that(parsed.value, equals("TRUE {{debug2}}"))
   }
@@ -34,7 +34,7 @@ test_that("eval.config Function", {
     rcmd.text <- sprintf("config.path <- config.%s; x <- eval.config(file = config.%s)", 
       i, i)
     eval(parse(text = rcmd.text))
-    expect_that(is.list(x) && length(x) > 1, equals(TRUE))
+    expect_that(is.list(x) && length(x) >= 1, equals(TRUE))
     expect_that(attributes(x)$config, equals("default"))
     expect_that(attributes(x)$configtype, equals(i))
     file.attr <- attributes(x)$file
@@ -50,7 +50,7 @@ test_that("eval.config using extra.list parse", {
     rcmd.text <- sprintf("x <- eval.config(file = config.%s, extra.list = list(debug = \"TRUE\"))", 
       i)
     eval(parse(text = rcmd.text))
-    expect_that(is.list(x) && length(x) > 1, equals(TRUE))
+    expect_that(is.list(x) && length(x) >= 1, equals(TRUE))
     parsed.value <- x$debug
     expect_that(parsed.value, equals("TRUE {{debug2}}"))
   }

@@ -4,27 +4,22 @@ title = "TOML Example"
 
 [default]
 debug = "{{debug}} {{debug2}}"
-test = "{{samtools@1.3.1:source_dir}}"
 
 [comments]
-version = "0.2.0"
-test_parse = "{{key:test_parse}} {{key:test_parse2}}"
-test_parse2 = "@>@ str_replace('{{key:test_parse}}', '2', '00')@<@ {{key:test_parse2}} {{debug2}}"
-test_parse3 = "{{key:test_parse}}"
-test_parse4 = "@>@ str_replace('{{key:test_parse2}}', '2', '00')@<@ @>@ str_replace('{{key:test_parse}}', '2', '00')@<@ {{key:test_parse2}} {{debug2}}"
+version = "0.2.3"
 
-[rcmd]
-linux = ["""./configure --enable-R-shlib --prefix={{destdir}} CFLAGS='\
-@>@
-library(stringr)
-include.flag <- unique(c('-I/{{key:test_parse}}/include', '-I{{bzip2:install.dir}}/include', '-I{{xz:install.dir}}/include', '-I{{pcre:install.dir}}/include', '-I{{curl:install.dir}}/include'))
-include.flag <- include.flag[!str_detect(include.flag, ':')]
-paste(include.flag, collapse=' ')
-@<@' \
-LDFLAGS='\
-@>@
-lib.flag <- unique(c('-I{{zlib:install.dir}}/lib', '-I{{bzip2:install.dir}}/lib', '-I/{{key:test_parse2}}/lib', '-I{{pcre:install.dir}}/lib', '-I{{curl:install.dir}}/lib'))
-lib.flag <- lib.flag[!str_detect(lib.flag, ':')]
-paste(lib.flag, collapse=' ')
-@<@' && make""", "make install"]
+[extra_list_parse]
+raw = "{{yes}}"
+parsed = "1"
 
+[other_config_parse]
+raw = "{{key:yes_flag}} {{key:no_flag}}"
+parsed = "yes no"
+
+[bash_parse]
+raw = "#>#echo bash#<#"
+parsed = "bash"
+
+[mulitple_parse]
+raw = "@>@str_replace('config','g$','gr')@<@, #>#echo configr#<#, {{key:yes_flag}}, {{yes}}"
+parsed = "configr, configr, yes, 1"
