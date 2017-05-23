@@ -280,5 +280,5 @@ config.3 <- read.config(file = config.json, extra.list = list(debug = "self", de
 # The followed two line command will return the same value
 config.4 <- read.config(file = config.json, extra.list = list(debug = "self", debug2 = "self2"), other.config = other.config, rcmd.parse = T)
 config.5 <- parse.extra(config.1, extra.list = list(debug = "self", debug2 = "self2"), other.config = other.config, rcmd.parse = T)
-
+config.6 <- parse.extra(config.1, extra.list = list(debug = "self", debug2 = "self2", yes = "1", no = "0"), other.config = other.config, rcmd.parse = T, bash.parse = T)
 ```

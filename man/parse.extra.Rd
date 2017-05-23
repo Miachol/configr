@@ -26,6 +26,12 @@ Parse the configuration {{var}} format, and replace it by extra.list values
 }
 \examples{
 config.json <- system.file('extdata', 'config.json', package='configr')
+config.other <- system.file('extdata', 'config.other.yaml', package='configr')
 config <- read.config(config.json)
 parse.extra(config, list(debug = 'TRUE'))
+parse.extra(config, list(debug = 'TRUE'), other.config = config.other)
+parse.extra(config, list(debug = 'TRUE'), other.config = config.other, 
+rcmd.parse = TRUE)
+parse.extra(config, list(debug = 'TRUE'), other.config = config.other, 
+rcmd.parse = TRUE, bash.parse = TRUE)
 }
