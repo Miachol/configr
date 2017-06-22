@@ -3,7 +3,7 @@ Type: Package
 Title: An Implementation of Parsing and Writing Configuration File (JSON/INI/YAML/TOML)
 Version: 0.3.0
 Authors@R: person("Jianfeng", "Li", email = "lee_jianfeng@sjtu.edu.cn", role = c("aut", "cre"))
-Description: 
+Description:
     Implements the JSON, INI, YAML and TOML parser for R setting and writing of configuration file. The functionality of this package is similar to that of package 'config'. 
 Depends:
     R (>= 3.3.0)
@@ -20,4 +20,7 @@ Imports:
     stringr (>= 1.2.0),
     glue
 RoxygenNote: 6.0.1
-Suggests: testthat
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

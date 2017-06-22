@@ -1,10 +1,10 @@
 ---
-title: "configr"
+title: "Usage of configr"
 author: "Jianfeng Li"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{configr}
+  %\VignetteIndexEntry{Usage of configr}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -19,7 +19,8 @@ configr is an integrated parser package that json, ini, yaml and toml format fil
 
 Example of json, ini, yaml, toml can be used follow the instructions below.
 
-```r
+```{r}
+library(configr)
 config.json <- system.file('extdata', 'config.json', package='configr')
 config.ini <- system.file('extdata', 'config.ini', package='configr')
 config.yaml <- system.file('extdata', 'config.yaml', package='configr')
@@ -30,66 +31,54 @@ config.toml <- system.file('extdata', 'config.toml', package='configr')
 
 `is.json.file`, `is.ini.file`, `is.yaml.file` and `is.toml.file` can be used to check the configuration file type. If input file were coincident with required, it will return TRUE. `get.config.type` will using above functions and get the file type name: json, ini, yaml, toml or FALSE.
 
-```r
+```{r, echo = TRUE}
 is.json.file(config.json)
 is.toml.file(config.toml)
 is.ini.file(config.ini)
 is.yaml.file(config.yaml)
 get.config.type(config.json)
+get.config.type(config.yaml)
+get.config.type(config.ini)
+get.config.type(config.toml)
 ```
 
 ## Get the configuration section names
 
 Section names of configuration file can be get using `eval.config.sections`. Python package [ConfigParser](https://pypi.python.org/pypi/configparser) `sections` inspired us to add this function.
 
-```r
-json.sections <- eval.config.sections(config.json)
-ini.sections <- eval.config.sections(config.ini)
-yaml.sections <- eval.config.sections(config.yaml)
-toml.sections <- eval.config.sections(config.toml)
+```{r, echo = TRUE}
+eval.config.sections(config.ini)
+eval.config.sections(config.toml)
 ```
 
 ## Read the configuration file
 
 `read.config` can read a configuration file in R and as a list object that can pass parameter to inner read function (fromJSON/read.ini/yaml.load_file/parseToml) accordingly.
 
-```r
+```{r, echo = TRUE}
 # Read in R as a list (JSON/INI/YAML/TOML be suported)
 # fromJSON/read.ini/readLines/yaml.load  parameters can be automatch by parameter name (encoding .etc.)
-json.list <- read.config(file = config.json)
-ini.list <- read.config(file = config.ini)
-yaml.list <- read.config(file = config.yaml)
-toml.list <- read.config(file = config.toml)
+read.config(file = config.toml)
 ```
 
 `eval.config` return a value or a list object containing the file path, config group, filetype as the attribute.
-``` r
+
+```{r, echo = TRUE}
 # Get the same obj with config package, only get the 
 # 'default or R_CONFIG_ACTIVE config sets' in config.cfg or R_CONFIGFILE_ACTIVE
-config.json.obj <- eval.config(file = config.json)
-config.ini.obj <- eval.config(file = config.ini)
-config.yaml.obj <- eval.config(file = config.yaml)
-config.toml.obj <- eval.config(file = config.toml)
+eval.config(file = config.yaml)
 
 # Read designated section
-config.json.obj <- eval.config(file = config.json, config = "comments")
-config.ini.obj <- eval.config(file = config.ini, config = "comments")
-config.yaml.obj <- eval.config(file = config.yaml, config = "comments")
-config.toml.obj <- eval.config(file = config.toml, config = "comments")
+eval.config(file = config.json, config = "comments")
 
 # Read designated section with its one value
-config.json.obj <- eval.config(file = config.json, config = "comments", value = "version")
-config.ini.obj <- eval.config(file = config.ini, config = "comments", value = "version")
-config.yaml.obj <- eval.config(file = config.yaml, config = "comments", value = "version")
-config.toml.obj <- eval.config(file = config.toml, config = "comments", value = "version")
+eval.config(file = config.ini, config = "comments", value = "version")
 ```
 
 `eval.config.merge` will merge multiple sections (equal to `config` in `eval.config` function) and reduce the layer of configuration file.
 
-```r
+```{r, echo = TRUE}
 eval.config.merge(file = config.json, sections = c('default', 'comments'))
-eval.config.merge(file = config.ini, sections = c('default', 'comments'))
-eval.config.merge(file = config.yaml, sections = c('default', 'comments'))
 eval.config.merge(file = config.toml, sections = c('default', 'comments'))
 ```
 
@@ -97,17 +86,21 @@ eval.config.merge(file = config.toml, sections = c('default', 'comments'))
 
 `convert.config` will read a configuration file and write a configuration file with appointed file type (json. ini, yaml). Moreover, `write.config` is similar to `convert.config` but using the list object rather than a file.
 
-```r
+```{r, echo = TRUE}
 # Convert YAML configuration file to JSON format
-convert.config(file = config.yaml, out.file = tempfile(, fileext = ".json"), convert.to = "JSON")
+out.json <- tempfile(, fileext = ".json")
+convert.config(file = config.yaml, out.file = out.json, convert.to = "JSON")
+get.config.type(out.json)
 
 # Generate a JSON format configuration file
 list.test <- list(a=c(123,456))
 out.fn <- sprintf("%s/test.json", tempdir())
 write.config(config.dat = list.test, file.path = out.fn, write.type = "json")
+get.config.type(out.fn)
 
 # Generate a YAML format configuration file with defined indent
 write.config(config.dat = list.test, file.path = out.fn, write.type = "yaml", indent = 4)
+get.config.type(out.fn)
 ```
 
 ## Configr specific extra parse
@@ -123,31 +116,41 @@ configr own several userful extra parse function, you can use the `parse.extra` 
 **Note:** `glue.parse` using the `glue` package `glue` function to do that. Just like glue('{1:5}') and be processed by unname(unlist(x)). 
 The `!!glue` can be changed if you setted `glue.flag`. It is a remarkable fact that only contain the `glue.flag` character be parsed and the order of item will be changed if the `glue` result were multiple values. e.g. `['{a}', '!!glue {1:5}', '{{a}}']` will be parsed to `['{a}', '1', '2', '3', '4', '5', '{{a}}']`
 
-```r
-# other.config 
-# key:
-#     test_parse: 123
-#     test_parse2: 234
-#     yes_flag: "yes"
-#     no_flag: "no"
-# samtools@1.3.1:
-#     source_dir: /tmp
+```{r, echo = TRUE}
+other.config <- system.file('extdata', 'config.other.yaml', package='configr')
+
+read.config(file = other.config)
 
 config.1 <- read.config(file = config.json)
-other.config <- system.file('extdata', 'config.other.yaml', package='configr')
-config.2 <- read.config(file = config.json, extra.list = list(debug = "self", debug2 = "self2"))
-config.3 <- read.config(file = config.json, extra.list = list(debug = "self", debug2 = "self2"), other.config = other.config)
+config.1$default
+read.config(file = config.json, extra.list = list(debug = "self", debug2 = "self2"))$default
+
+sections <- c('default', 'other_config_parse')
+config.1[sections]
+read.config(file = config.json, extra.list = list(debug = "self", debug2 = "self2"), 
+  other.config = other.config)[sections]
+
+sections <- c('default', 'other_config_parse', 'rcmd_parse')
 # The followed two line command will return the same value
-config.4 <- read.config(file = config.json, extra.list = list(debug = "self", debug2 = "self2"), other.config = other.config, rcmd.parse = T)
-config.5 <- parse.extra(config.1, extra.list = list(debug = "self", debug2 = "self2"), other.config = other.config, rcmd.parse = T)
-config.6 <- parse.extra(config.1, extra.list = list(debug = "self", debug2 = "self2", yes = "1", no = "0"), other.config = other.config, rcmd.parse = T, bash.parse = T)
+config.1[sections]
+read.config(file = config.json, extra.list = list(debug = "self", debug2 = "self2"), 
+  other.config = other.config, rcmd.parse = T)[sections]
+parse.extra(config.1, extra.list = list(debug = "self", debug2 = "self2"), 
+  other.config = other.config, rcmd.parse = T)[sections]
+
+
+sections <- c('default', 'other_config_parse', 'rcmd_parse', 'mulitple_parse')
+config.1[sections]
+parse.extra(config.1, extra.list = list(debug = "self", debug2 = "self2", yes = "1", no = "0"), 
+  other.config = other.config, rcmd.parse = T, bash.parse = T)[sections]
 
 # glue parse
 raw <- c("a", "!!glue{1:5}", "c")
 list.raw <- list(glue = raw, nochange = 1:10)
-parsed <- parse.extra(list.raw, glue.parse = TRUE, glue.flag = "!!glue")
+list.raw
 expect.parsed.1 <- c("a", "1", "2", "3", "4", "5", "c")
 expect.parsed.2 <- list(glue = expect.parsed.1, nochange = 1:10)
+parse.extra(list.raw, glue.parse = TRUE, glue.flag = "!!glue")
 
 ```
 
