@@ -101,29 +101,54 @@ toml.config.all <- eval.config.merge(file = config.toml)
 ```
 
 ```r
-convert.config(file = config.yaml, out.file = tempfile(, fileext = ".json"), convert.to = "JSON")
+convert.config(file = config.yaml, out.file = tempfile(, fileext = ".json"), 
+  convert.to = "JSON")
 
 list.test <- list(a=c(123,456))
 out.fn <- sprintf("%s/test.json", tempdir())
-write.config(config.dat = list.test, file.path = out.fn, write.type = "json")
-write.config(config.dat = list.test, file.path = out.fn, write.type = "json", indent = 2)
+
+write.config(config.dat = list.test, file.path = out.fn, 
+  write.type = "json")
+
+write.config(config.dat = list.test, file.path = out.fn, 
+  write.type = "json", indent = 2)
+
 out.fn <- sprintf("%s/test.yaml", tempdir())
-write.config(config.dat = list.test, file.path = out.fn, write.type = "yaml")
-write.config(config.dat = list.test, file.path = out.fn, write.type = "yaml", indent = 4)
+
+write.config(config.dat = list.test, file.path = out.fn, 
+  write.type = "yaml")
+
+write.config(config.dat = list.test, file.path = out.fn, 
+  write.type = "yaml", indent = 4)
 
 out.fn <- sprintf("%s/test.ini", tempdir())
-write.config(config.dat = list.test, file.path = out.fn, write.type = "ini")
+
+write.config(config.dat = list.test, file.path = out.fn, 
+  write.type = "ini")
 ```
 
 ```r
 config.1 <- read.config(file = config.json)
 other.config <- system.file('extdata', 'config.other.yaml', package='configr')
-config.2 <- read.config(file = config.json, extra.list = list(debug = "self", debug2 = "self2"))
-config.3 <- read.config(file = config.json, extra.list = list(debug = "self", debug2 = "self2"), other.config = other.config)
 
-config.4 <- read.config(file = config.json, extra.list = list(debug = "self", debug2 = "self2"), other.config = other.config, rcmd.parse = T)
-config.5 <- parse.extra(config.1, extra.list = list(debug = "self", debug2 = "self2"), other.config = other.config, rcmd.parse = T)
-config.6 <- parse.extra(config.1, extra.list = list(debug = "self", debug2 = "self2", yes = "1", no = "0"), other.config = other.config, rcmd.parse = T, bash.parse = T)
+config.2 <- read.config(file = config.json, 
+  extra.list = list(debug = "self", debug2 = "self2"))
+
+config.3 <- read.config(file = config.json, 
+  extra.list = list(debug = "self", debug2 = "self2"), 
+  other.config = other.config)
+
+config.4 <- read.config(file = config.json, 
+  extra.list = list(debug = "self", debug2 = "self2"), 
+  other.config = other.config, rcmd.parse = T)
+
+config.5 <- parse.extra(config.1, 
+  extra.list = list(debug = "self", debug2 = "self2"), 
+  other.config = other.config, rcmd.parse = T)
+  
+config.6 <- parse.extra(config.1, 
+  extra.list = list(debug = "self", debug2 = "self2", yes = "1", no = "0"), 
+  other.config = other.config, rcmd.parse = T, bash.parse = T)
 
 raw <- c("a", "!!glue{1:5}", "c")
 list.raw <- list(glue = raw, nochange = 1:10)
