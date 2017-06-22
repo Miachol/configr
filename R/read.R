@@ -7,6 +7,10 @@
 #' and {{debug}} will be setted to 'TRUE'
 #' @param other.config Path of another configuration file that can replace the configuration file '{{key:value}}' 
 #' @param rcmd.parse Logical wheather parse '@>@str_replace('abc', 'b', 'c')@<@' that existed in config to 'acc'
+#' @param bash.parse Logical wheather parse '#>#echo $HOME#<#' in config to your HOME PATH
+#' @param glue.parse Logical wheather parse '!!glue{1:5}' in config to ['1','2','3','4','5']; 
+#' ['nochange', '!!glue(1:5)', 'nochange'] => ['nochange', '1', '2', '3', '4', '5', 'nochange']
+#' @param glue.flag A character flage indicating wheater run glue() function to parse (Default is !!glue) 
 #' @param file.type Default is no need to specify the variable, file.type will be automatically 
 #' identify by \code{\link{get.config.type}}. If the value be specified, the step of filetype identification will be skipped.
 #' @param ... Arguments for \code{\link{get.config.type}}, 
@@ -31,7 +35,8 @@
 #' other.config <- system.file('extdata', 'config.other.yaml', package='configr')
 #' config.extra.parsed.2 <- read.config(config.json, list(debug = 'TRUE'), other.config)
 read.config <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), extra.list = list(), 
-  other.config = "", rcmd.parse = FALSE, file.type = NULL, ...) {
+  other.config = "", rcmd.parse = FALSE, bash.parse = FALSE, glue.parse = FALSE, 
+  glue.flag = "!!glue", file.type = NULL, ...) {
   status <- check.file.parameter(file)
   if (status == FALSE) {
     return(FALSE)
@@ -43,7 +48,8 @@ read.config <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), 
     return(FALSE)
   }
   config.list <- get.config.list(file = file, file.type = file.type, extra.list = extra.list, 
-    other.config = other.config, rcmd.parse = rcmd.parse, ...)
+    other.config = other.config, rcmd.parse = rcmd.parse, bash.parse = bash.parse, 
+    glue.parse = glue.parse, glue.flag = glue.flag, ...)
   return(config.list)
 }
 

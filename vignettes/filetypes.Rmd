@@ -1,0 +1,157 @@
+---
+title: "Configuration file types"
+author: "Jianfeng Li"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{configr}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+```
+
+configr can be used to parse JSON, INI, YAML and TOML format configuration files. Examples of json, ini, yaml, toml format configuration file is as follows. Some of parsed result using configr also be present with raw and parsed in different sections.
+
+## Configuration file format
+
+### JSON
+
+``` json
+{
+  "default": {
+    "debug": "{{debug}} {{debug2}}"
+  },
+  "comments": {
+    "version": "0.2.3"
+  },
+  "extra_list_parse": {
+    "raw": "{{yes}}",
+    "parsed": "1"
+  },
+  "other_config_parse": {
+    "raw": "{{key:yes_flag}} {{key:no_flag}}",
+    "parsed": "yes no"
+  },
+  "rcmd_parse": {
+    "raw": "@>@ Sys.Date() @<@"
+  },
+  "bash_parse": {
+    "raw": "#>#echo bash#<#",
+    "parsed": "bash"
+  },
+  "mulitple_parse": {
+    "raw":"@>@str_replace('config','g$','gr')@<@, #>#echo configr#<#, {{key:yes_flag}}, {{yes}}, @>@str_replace('configr','r','')@<@, #># echo config#<#, {{key:no_flag}}, {{no}}",
+    "parsed":"configr, configr, yes, 1, config, config, no, 0"
+  },
+  "glue_parse": {
+    "raw_1":"!!glue {1:10}",
+    "parsed_1":["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    "raw_2":"!!glue_numeric {1:10}",
+    "parsed_2":[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  }
+}
+
+```
+More infomation and example of JSON can be founded in [json.org](http://www.json.org/), [JSON Example](http://www.json.org/example.html) and [JSON-wikipedia](https://en.wikipedia.org/wiki/JSON). `{{key:key:value}}/{{key}}` can be parsed by parse.extra using `extra.list` and `other.config` parameters. `@>@ str_replace("config", "g$", "gr")@<@` can be parsed by `parse.extra` setting parameter `rcmd.parse` to `TRUE`. Example of that can be founded in this document tail.
+
+### INI
+``` ini
+[default]
+debug = {{debug}} {{debug2}}
+
+[comments]
+version = 0.2.3
+
+[extra_list_parse]
+raw = {{yes}}
+parsed = 1
+
+[other_config_parse]
+raw = {{key:yes_flag}} {{key:no_flag}}
+parsed = yes no
+
+[rcmd_parse]
+raw = @>@ Sys.Date() @<@
+
+[bash_parse]
+raw = #>#echo bash#<#
+parsed = bash
+
+[mulitple_parse]
+raw = @>@str_replace('config','g$','gr')@<@, #>#echo configr#<#, {{key:yes_flag}}, {{yes}}, @>@str_replace('configr','r','')@<@, #>#echo config#<#, {{key:no_flag}}, {{no}}
+parsed = configr, configr, yes, 1, config, config, no, 0
+
+[glue_parse]
+raw_1 = !!glue {1:10}
+parsed_1 = '1', '2', '3', '4', '5', '6', '7', '8', '9', '10' (Not one item)
+raw_2 = !!glue_numeric {1:10}
+parsed_2 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 (Not one item)
+```
+More infomation and example of INI can be founded in [INI-wikipedia](https://en.wikipedia.org/wiki/INI_file).
+
+### YAML
+``` yaml
+default:
+  debug: '{{debug}} {{debug2}}'
+comments:
+  version: 0.2.3
+extra_list_parse:
+  raw: '{{yes}}'
+  parsed: '1'
+other_config_parse:
+  raw: '{{key:yes_flag}} {{key:no_flag}}'
+  parsed: yes no
+rcmd_parse:
+  raw: '@>@ Sys.Date() @<@'
+bash_parse:
+  raw: "#>#echo bash#<#"
+  parsed: bash
+mulitple_parse:
+  raw: "@>@str_replace('config','g$','gr')@<@, #>#echo configr#<#, {{key:yes_flag}}, {{yes}}, @>@str_replace('configr','r','')@<@, #>#echo config#<#, {{key:no_flag}}, {{no}}"
+  parsed: configr, configr, yes, 1, config, config, no, 0
+glue_parse: 
+  raw_1: "!!glue {1:10}"
+  parsed_1: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+  raw_2: "!!glue_numeric {1:10}"
+  parsed_2: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+More infomation and example of YAML can be founded in [yaml.org](http://www.yaml.org/) and [YAML-wikipedia](https://en.wikipedia.org/wiki/YAML).
+
+### TOML
+``` toml
+# This is a TOML document. Jianfeng.
+
+title = "TOML Example"
+
+[default]
+debug = "{{debug}} {{debug2}}"
+
+[comments]
+version = "0.2.3"
+
+[extra_list_parse]
+raw = "{{yes}}"
+parsed = "1"
+
+[other_config_parse]
+raw = "{{key:yes_flag}} {{key:no_flag}}"
+parsed = "yes no"
+
+[bash_parse]
+raw = "#>#echo bash#<#"
+parsed = "bash"
+
+[mulitple_parse]
+raw = "@>@str_replace('config','g$','gr')@<@, #>#echo configr#<#, {{key:yes_flag}}, {{yes}}, @>@str_replace('configr','r','')@<@, #>#echo config#<#, {{key:no_flag}}, {{no}}"
+parsed = "configr, configr, yes, 1, config, config, no, 0"
+
+[glue_parse]
+raw_1 = "!!glue {1:10}"
+parsed_1 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+raw_2 = "!!glue_numeric {1:10}"
+parsed_2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+More infomation and example of TOML can be founded in and [toml-lang/toml](https://github.com/toml-lang/toml) and [TOML-wikipedia](https://en.wikipedia.org/wiki/TOML).

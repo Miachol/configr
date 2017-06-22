@@ -27,5 +27,5 @@
 #'
 #' @docType package
 #' @name configr
-#' @import jsonlite RcppTOML yaml ini stringr
+#' @import jsonlite RcppTOML yaml ini stringr glue
 NULL

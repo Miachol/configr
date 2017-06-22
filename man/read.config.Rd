@@ -6,6 +6,7 @@
 \usage{
 read.config(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
   extra.list = list(), other.config = "", rcmd.parse = FALSE,
+  bash.parse = FALSE, glue.parse = FALSE, glue.flag = "!!glue",
   file.type = NULL, ...)
 }
 \arguments{
@@ -19,6 +20,13 @@ and {{debug}} will be setted to 'TRUE'}
 \item{other.config}{Path of another configuration file that can replace the configuration file '{{key:value}}'}
 
 \item{rcmd.parse}{Logical wheather parse '@>@str_replace('abc', 'b', 'c')@<@' that existed in config to 'acc'}
+
+\item{bash.parse}{Logical wheather parse '#>#echo $HOME#<#' in config to your HOME PATH}
+
+\item{glue.parse}{Logical wheather parse '!!glue{1:5}' in config to ['1','2','3','4','5']; 
+['nochange', '!!glue(1:5)', 'nochange'] => ['nochange', '1', '2', '3', '4', '5', 'nochange']}
+
+\item{glue.flag}{A character flage indicating wheater run glue() function to parse (Default is !!glue)}
 
 \item{file.type}{Default is no need to specify the variable, file.type will be automatically 
 identify by \code{\link{get.config.type}}. If the value be specified, the step of filetype identification will be skipped.}

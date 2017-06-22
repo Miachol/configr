@@ -1,3 +1,9 @@
+2017-06-22 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+        * glue parse be supported in R/parse.R
+		* bash.parse and glue.parse added in R/read.R
+		* Reduce README.md and two vignettes be added in vignettes
+
 2017-05-23 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 
 		* Add file.type parameter in read.config function

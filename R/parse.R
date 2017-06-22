@@ -5,6 +5,9 @@
 #' @param other.config Path of another configuration file that can replace the configuration file '{{key:value}}' 
 #' @param rcmd.parse Logical wheather parse '@>@str_replace('abc', 'b', 'c')@<@' in config to 'acc'
 #' @param bash.parse Logical wheather parse '#>#echo $HOME#<#' in config to your HOME PATH
+#' @param glue.parse Logical wheather parse '!!glue{1:5}' in config to ['1','2','3','4','5']; 
+#' ['nochange', '!!glue(1:5)', 'nochange'] => ['nochange', '1', '2', '3', '4', '5', 'nochange']
+#' @param glue.flag A character flage indicating wheater run glue() function to parse (Default is !!glue) 
 #' @return A list
 #' @export
 #' @examples
@@ -17,8 +20,18 @@
 #' rcmd.parse = TRUE)
 #' parse.extra(config, list(debug = 'TRUE'), other.config = config.other, 
 #' rcmd.parse = TRUE, bash.parse = TRUE)
+#'
+#' raw <- c('a', '!!glue{1:5}', 'c')
+#' expect.parsed.1 <- c('a', '1', '2', '3', '4', '5', 'c')
+#' list.raw <- list(glue = raw, nochange = 1:10)
+#' parsed <- parse.extra(list.raw, glue.parse = TRUE)
+#' 
+#' raw <- c('!!glue_numeric{1:5}')
+#' expect.parsed.1 <- c(1, 2, 3, 4, 5)
+#' list.raw <- list(glue = raw, nochange = 1:10)
+#' parsed <- parse.extra(list.raw, glue.parse = TRUE)
 parse.extra <- function(config, extra.list = list(), other.config = "", rcmd.parse = FALSE, 
-  bash.parse = FALSE) {
+  bash.parse = FALSE, glue.parse = FALSE, glue.flag = "!!glue") {
   if (length(config) == 0) {
     return(config)
   }
@@ -34,13 +47,16 @@ parse.extra <- function(config, extra.list = list(), other.config = "", rcmd.par
   if (bash.parse) {
     config <- parse.extra.bash(config)
   }
+  if (glue.parse) {
+    config <- parse.extra.glue(config, glue.flag = glue.flag)
+  }
   return(config)
 }
 
 # Parse the configuration {{var}} format string, and replace it by extra.list
 # values
 parse.extra.list <- function(config, extra.list) {
-  list.names <- names(config)
+  list.names <- 1:length(config)
   args.all <- extra.list
   for (list.item in list.names) {
     list.tmp <- config[[list.item]]
@@ -67,7 +83,7 @@ parse.extra.list <- function(config, extra.list) {
 # Parse the configuration {{key:value}} format string and replace it by
 # other.config values
 parse.extra.config <- function(config, other.config) {
-  list.names <- names(config)
+  list.names <- 1:length(config)
   if (!is.character(other.config)) {
     return(config)
   }
@@ -194,7 +210,7 @@ extract.cmd.items <- function(list.tmp, left.flag, right.flag) {
 }
 
 parse.config.recursion <- function(config, parse.nonlist.fun, left.flag, right.flag) {
-  list.names <- names(config)
+  list.names <- 1:length(config)
   for (list.item in list.names) {
     list.tmp <- config[[list.item]]
     if (is.list(list.tmp)) {
@@ -216,6 +232,54 @@ parse.config.recursion <- function(config, parse.nonlist.fun, left.flag, right.f
         }
         config <- parse.nonlist.fun(config, list.item, text.nonlist)
       }
+    }
+  }
+  return(config)
+}
+
+# Parse like {1:5} and get final value (input a list)
+str2multiple <- function(input = "", glue.flag = "!!glue") {
+  index <- str_detect(input, fixed(glue.flag))
+  if (any(index)) {
+    glue.cus <- function(x) {
+      if (str_detect(x, fixed(glue.flag))) {
+        glue.numeric.flag <- sprintf("%s_numeric", glue.flag)
+        is.numeric.flag <- str_detect(x, fixed(glue.numeric.flag))
+        if (is.numeric.flag) {
+          x <- str_replace_all(x, fixed(glue.numeric.flag), "")
+        } else {
+          x <- str_replace_all(x, fixed(glue.flag), "")
+        }
+        x <- str_replace_all(x, "^ *", "")
+        if (is.numeric.flag) {
+          x <- as.numeric(glue(x))
+        } else {
+          x <- as.character(glue(x))
+        }
+      }
+      return(x)
+    }
+    if (length(input) == 1) {
+      parsed <- glue.cus(input)
+    } else {
+      parsed <- sapply(input, glue.cus)
+      parsed <- unname(unlist(parsed))
+    }
+    return(parsed)
+  } else {
+    return(input)
+  }
+}
+
+# Use glue to parse character
+parse.extra.glue <- function(config, glue.flag = "!!glue") {
+  list.names <- 1:length(config)
+  for (list.item in list.names) {
+    list.tmp <- config[[list.item]]
+    if (is.list(list.tmp)) {
+      config[[list.item]] <- parse.extra.glue(config[[list.item]])
+    } else {
+      config[[list.item]] <- str2multiple(config[[list.item]], glue.flag = glue.flag)
     }
   }
   return(config)
