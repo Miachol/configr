@@ -1,3 +1,8 @@
+2017-07-18 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* parameter 'sections' be added in R/write.R 'write.config'
+		* a new function 'config.sections.del' be added in R/del.R
+
 2017-06-22 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 
         * glue parse be supported in R/parse.R

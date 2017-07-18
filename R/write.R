@@ -5,6 +5,7 @@
 #' the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the
 #' variable does not exist)
 #' @param write.type json/ini/yaml
+#' @param sections Sections that need be write in file, default is NULL and use all of sections
 #' @param ... Arguments for \code{\link[ini]{write.ini}}, 
 #' \code{\link[jsonlite]{prettify}}, \code{\link[jsonlite]{toJSON}}, 
 #' \code{\link[yaml]{as.yaml}} and \code{\link{cat}}
@@ -22,10 +23,17 @@
 #' out.yaml <- sprintf('%s/test.yaml', tempdir()) 
 #' write.config(list.test, out.yaml, write.type = 'yaml')
 write.config <- function(config.dat, file.path = Sys.getenv("R_CONFIGFILE_ACTIVE", 
-  "config.cfg"), write.type = "ini", ...) {
+  "config.cfg"), write.type = "ini", sections = NULL, ...) {
   if (!is.list(config.dat)) {
     warning("config.dat need be a list.")
     return(FALSE)
+  }
+  if (!is.null(sections)) {
+    if (any(!sections %in% c(names(config.dat), 1:length(config.dat)))) {
+      stop(sprintf("Section %s were not existed in config.dat!"))
+    } else {
+      config.dat <- config.dat[sections]
+    }
   }
   write.config.list(config.dat = config.dat, file.path = file.path, write.type = write.type, 
     ...)

@@ -101,6 +101,10 @@ get.config.type(out.fn)
 # Generate a YAML format configuration file with defined indent
 write.config(config.dat = list.test, file.path = out.fn, write.type = "yaml", indent = 4)
 get.config.type(out.fn)
+
+# Generate a YAML format configuration file with defined indent and pointed sections
+#write.config(config.dat = list.test, file.path = out.fn, write.type = "yaml", sections = "a", indent = 4)
+#get.config.type(out.fn)
 ```
 
 ## Configr specific extra parse
@@ -154,6 +158,14 @@ parse.extra(list.raw, glue.parse = TRUE, glue.flag = "!!glue")
 
 ```
 
+## Others
+`config.section.del` can be used to delete a section of config, just do `config$section <- NULL`.
 
-
+``` {r, echo = TRUE}
+config <- read.config(file = config.json, extra.list = list(debug = "self", debug2 = "self2"), 
+  other.config = other.config)[sections]
+names(config)
+config <- config.sections.del(config, 'default')
+names(config)
+```
 
