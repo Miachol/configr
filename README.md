@@ -125,6 +125,9 @@ out.fn <- sprintf("%s/test.ini", tempdir())
 
 write.config(config.dat = list.test, file.path = out.fn, 
   write.type = "ini")
+
+write.config(config.dat = list.test, file.path = out.fn, sections = "a",
+  write.type = "ini")
 ```
 
 ```r
@@ -155,4 +158,6 @@ list.raw <- list(glue = raw, nochange = 1:10)
 parsed <- parse.extra(list.raw, glue.parse = TRUE, glue.flag = "!!glue")
 expect.parsed.1 <- c("a", "1", "2", "3", "4", "5", "c")
 expect.parsed.2 <- list(glue = expect.parsed.1, nochange = 1:10)
+
+config.partial <- config.sections.del(config.1, "default")
 ```
