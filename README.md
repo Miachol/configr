@@ -12,12 +12,12 @@ and '[TOML](https://CRAN.R-project.org/package=RcppTOML)' parser for R setting a
 
 # Introduction 
 
-The configuration file are necessary for many projects that will help us to manage and set project environment variables easily.
+The configuration file is necessary for many projects that will help us to manage and set project environment variables easily.
 
-Configuration files, from INI/XML/JSON/YAML to TOML, readability and maneuverability have been improved too much in the past few years, and there are serveral parsers be created in R and other programming language. That have made us becomes more efficient, but, we need to remember the different functions for different format configuration file that sometimes we only just want to read it and regardless of that format. So, using single function to read or/and write most of configuration file are good way to reduce memory burden.
+Configuration files, from INI/XML/JSON/YAML to TOML, readability and maneuverability have been improved too much in the past few years, and there are several parsers be created in R and other programming languages. That has made us becomes more efficient, but, we need to remember the different functions for different format configuration file that sometimes we only just want to read it and regardless of that format. So, using a single function to read or/and write most of the configuration file are a good way to reduce memory burden.
 
 
-[configr](https://github.com/Miachol/configr) have done some work to relax us on configuration files that can be used to parse and generate JSON/INI/YAML/TOML format configuration file. The functionality of this package is similar to that of package '[config](https://CRAN.R-project.org/package=config)'.
+[configr](https://github.com/Miachol/configr) have done some work to relax us on configuration files that can be used to parse and generate JSON/INI/YAML/TOML format configuration file. The functionality of this package is similar to that of package '[config](https://CRAN.R-project.org/package=config)'. Viginates can be found in [usage-of-configr](https://life2cloud.com/en/2017/07/usage-of-configr/) and [configuration-filetypes](https://life2cloud.com/en/2017/07/configuration-filetypes/).
 
 # Installation
 
@@ -50,10 +50,6 @@ config.ini <- system.file('extdata', 'config.ini', package='configr')
 config.yaml <- system.file('extdata', 'config.yaml', package='configr')
 config.toml <- system.file('extdata', 'config.toml', package='configr')
 
-```
-
-
-```r
 is.json <- is.json.file(file = config.json)
 is.ini <- is.ini.file(file = config.ini)
 is.yaml <- is.yaml.file(file = config.yaml)
@@ -63,44 +59,32 @@ is.json <- is.json.file(file = config.yaml, json.file.debug = T)
 is.ini <- is.ini.file(file = config.json, ini.file.debug = T)
 is.yaml <- is.yaml.file(file = config.toml, yaml.file.debug = T)
 is.toml <- is.toml.file(file = config.yaml, toml.file.debug = T)
-```
 
-```r
 json <- get.config.type(file = config.json) 
 ini <- get.config.type(file = config.ini) 
 yaml <- get.config.type(file = config.yaml) 
 toml <- get.config.type(file = config.toml) 
-```
 
-```r
 json.list <- read.config(file = config.json)
 ini.list <- read.config(file = config.ini)
 yaml.list <- read.config(file = config.yaml)
 toml.list <- read.config(file = config.toml) 
-```
 
-```r
 config.json.obj <- eval.config(file = config.json)
 config.ini.obj <- eval.config(file = config.ini)
 config.yaml.obj <- eval.config(file = config.yaml)
 config.toml.obj <- eval.config(file = config.toml)
-```
 
-```r
 json.sections <- eval.config.sections(file = config.json)
 ini.sections <- eval.config.sections(file = config.ini)
 yaml.sections <- eval.config.sections(file = config.yaml)
 toml.sections <- eval.config.sections(file = config.toml)
-```
 
-```r
 json.config.all <- eval.config.merge(file = config.json)
 ini.config.all <- eval.config.merge(file = config.ini)
 yaml.config.all <- eval.config.merge(file = config.yaml)
 toml.config.all <- eval.config.merge(file = config.toml)
-```
 
-```r
 convert.config(file = config.yaml, out.file = tempfile(, fileext = ".json"), 
   convert.to = "JSON")
 
@@ -128,9 +112,7 @@ write.config(config.dat = list.test, file.path = out.fn,
 
 write.config(config.dat = list.test, file.path = out.fn, sections = "a",
   write.type = "ini")
-```
 
-```r
 config.1 <- read.config(file = config.json)
 other.config <- system.file('extdata', 'config.other.yaml', package='configr')
 
