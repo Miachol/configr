@@ -1,4 +1,4 @@
-Package: configr 
+Package: configr
 Type: Package
 Title: An Implementation of Parsing and Writing Configuration File (JSON/INI/YAML/TOML)
 Version: 0.3.1

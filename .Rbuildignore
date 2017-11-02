@@ -4,3 +4,4 @@
 ^.*\.test
 ^data-raw$
 .travis.yml
+Makefile
