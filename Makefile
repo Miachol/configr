@@ -34,3 +34,7 @@ clean:
 test:
 	cd .;\
     Rscript -e "devtools::test()"
+
+format:
+	cd .;\
+	Rscript -e "library(formatR);options('formatR.indent'=2);tidy_dir('./R');tidy_dir('./BioInstaller/inst/extdata/')"

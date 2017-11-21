@@ -1,3 +1,7 @@
+2017-11-21 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* fetch.config be added in R/fetch.R
+
 2017-07-18 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 
 		* parameter 'sections' be added in R/write.R 'write.config'

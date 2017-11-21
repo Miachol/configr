@@ -82,6 +82,16 @@ eval.config.merge(file = config.json, sections = c('default', 'comments'))
 eval.config.merge(file = config.toml, sections = c('default', 'comments'))
 ```
 
+`fetch.config` can parse configuration files from internet and local that merged the files and return a list.
+
+```{r, echo = TRUE}
+links <- c("https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_annovar.toml", 
+           "https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_main.toml", 
+           system.file('extdata', 'config.toml', package = "configr"))
+x <- fetch.config(links)
+x[c(1:5, length(x))]
+```
+
 ## Converting and writing configuration file
 
 `convert.config` will read a configuration file and write a configuration file with appointed file type (json. ini, yaml). Moreover, `write.config` is similar to `convert.config` but using the list object rather than a file.
@@ -168,4 +178,3 @@ names(config)
 config <- config.sections.del(config, 'default')
 names(config)
 ```
-
