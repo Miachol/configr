@@ -11,9 +11,11 @@
 #' @return A list or a vector
 #' @export
 #' @examples
-#' links <- c('https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_annovar.toml', 
-#'            'https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_main.toml', 
-#'             system.file('extdata', 'config.toml', package = 'configr'))
+#' links <- c(paste0('https://raw.githubusercontent.com/JhuangLab', 
+#' '/BioInstaller/master/inst/extdata/config/db/db_annovar.toml'), 
+#' paste0('https://raw.githubusercontent.com/JhuangLab/BioInstaller', 
+#' '/master/inst/extdata/config/db/db_main.toml'), 
+#' system.file('extdata', 'config.toml', package = 'configr'))
 #' x <- fetch.config(links)
 fetch.config <- function(links, return.files = FALSE, destdir = normalizePath("./"), 
   keep.basename = TRUE) {

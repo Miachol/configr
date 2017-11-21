@@ -18,7 +18,7 @@ and not to read and merge the configuration files, default is FALSE}
 default is ./}
 
 \item{keep.basename}{Whather use the links basename as the saved name 
-or use paste0(tempfile(), "_configr")}
+or use paste0(tempfile(), '_configr')}
 }
 \value{
 A list or a vector
@@ -27,8 +27,10 @@ A list or a vector
 Fetch configuration file and generate a merged list
 }
 \examples{
-links <- c('https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_annovar.toml', 
-           'https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_main.toml', 
-            system.file('extdata', 'config.toml', package = 'configr'))
+links <- c(paste0('https://raw.githubusercontent.com/JhuangLab', 
+'/BioInstaller/master/inst/extdata/config/db/db_annovar.toml'), 
+paste0('https://raw.githubusercontent.com/JhuangLab/BioInstaller', 
+'/master/inst/extdata/config/db/db_main.toml'), 
+system.file('extdata', 'config.toml', package = 'configr'))
 x <- fetch.config(links)
 }
