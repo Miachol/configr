@@ -85,6 +85,10 @@ ini.config.all <- eval.config.merge(file = config.ini)
 yaml.config.all <- eval.config.merge(file = config.yaml)
 toml.config.all <- eval.config.merge(file = config.toml)
 
+links <- c('https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_annovar.toml', 
+           'https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_main.toml')
+fetch.config(links)
+
 convert.config(file = config.yaml, out.file = tempfile(, fileext = ".json"), 
   convert.to = "JSON")
 
