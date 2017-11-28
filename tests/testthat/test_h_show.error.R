@@ -7,7 +7,7 @@ config.error.ini <- system.file("extdata", "config.error.ini", package = "config
 config.error.yaml <- system.file("extdata", "config.error.yaml", package = "configr")
 config.error.toml <- system.file("extdata", "config.error.toml", package = "configr")
 
-test_that("Raise Warning and Error tests", {
+test_that("Raise Warning and Error tests or return FALSE", {
   x <- tryCatch({
     suppressWarnings(get.config.type(list()))
   }, warning = function(w) {
@@ -15,7 +15,7 @@ test_that("Raise Warning and Error tests", {
   }, error = function(e) {
     return("Error")
   })
-  expect_that(x, equals("Error"))
+  expect_that(x, equals(FALSE))
   
   config.opts <- c("json", "ini", "yaml", "toml")
   for (i in config.opts) {
@@ -28,7 +28,7 @@ test_that("Raise Warning and Error tests", {
     }, error = function(e) {
       return("Error")
     })
-    expect_that(x, equals("Error"))
+    expect_that(x, equals(FALSE))
   }
   for (i in config.opts) {
     x <- NULL
@@ -40,7 +40,7 @@ test_that("Raise Warning and Error tests", {
     }, error = function(e) {
       return("Error")
     })
-    expect_that(x, equals("Warning"))
+    expect_that(x, equals(FALSE))
   }
   for (i in config.opts) {
     x <- NULL
@@ -65,7 +65,7 @@ test_that("Raise Warning and Error tests", {
     }, error = function(e) {
       return("Error")
     })
-    expect_that(x, equals("Warning"))
+    expect_that(x, equals("Error"))
   }
   for (i in config.opts) {
     for (j in config.opts[config.opts != i]) x <- NULL

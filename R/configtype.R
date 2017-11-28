@@ -24,6 +24,9 @@
 #' print(is.json.file(config.toml))
 is.json.file <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), 
   json.file.debug = FALSE, ...) {
+  if (!is.character(file)) {
+    return(FALSE)
+  }
   status <- check.file.parameter(file)
   if (status == FALSE) {
     return(FALSE)
@@ -63,6 +66,9 @@ is.json.file <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
 #' print(is.ini.file(config.toml))
 is.ini.file <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), ini.file.debug = FALSE, 
   ...) {
+  if (!is.character(file)) {
+    return(FALSE)
+  }
   status <- check.file.parameter(file)
   if (status == FALSE) {
     return(FALSE)
@@ -103,6 +109,9 @@ is.ini.file <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), 
 #' print(is.yaml.file(config.toml))
 is.yaml.file <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), 
   yaml.file.debug = FALSE, ...) {
+  if (!is.character(file)) {
+    return(FALSE)
+  }
   status <- check.file.parameter(file)
   if (status == FALSE) {
     return(FALSE)
@@ -142,6 +151,9 @@ is.yaml.file <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
 #' print(is.toml.file(config.toml))
 is.toml.file <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), 
   toml.file.debug = FALSE, ...) {
+  if (!is.character(file)) {
+    return(FALSE)
+  }
   status <- check.file.parameter(file)
   if (status == FALSE) {
     return(FALSE)
@@ -182,6 +194,9 @@ is.toml.file <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
 #' get.config.type(file=config.toml)
 get.config.type <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), 
   ...) {
+  if (!is.character(file)) {
+    return(FALSE)
+  }
   status <- check.file.parameter(file)
   if (status == FALSE) {
     return(FALSE)
@@ -195,8 +210,6 @@ get.config.type <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg
   } else if (is.toml.file(file = file, ...)) {
     file.type <- "toml"
   } else {
-    warning(sprintf("%s are not JSON/INI/YAML/TOML format configuration file.", 
-      file))
     return(FALSE)
   }
   return(file.type)
