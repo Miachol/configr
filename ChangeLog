@@ -1,5 +1,9 @@
 2017-11-28 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 
+		* fetch.config can pass paraters to read.config
+
+2017-11-28 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
 		* is.*.file only return TRUE or FALSE
 
 2017-11-21 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>

@@ -8,6 +8,7 @@
 #' default is ./
 #' @param keep.basename Whather use the links basename as the saved name 
 #' or use paste0(tempfile(), '_configr')
+#' @param ... Extra parameters pass to \code{read.config}
 #' @return A list or a vector
 #' @export
 #' @examples
@@ -18,7 +19,7 @@
 #' system.file('extdata', 'config.toml', package = 'configr'))
 #' x <- fetch.config(links)
 fetch.config <- function(links, return.files = FALSE, destdir = normalizePath("./"), 
-  keep.basename = TRUE) {
+  keep.basename = TRUE, ...) {
   defined_flag <- c("http://", "https://", "ftp://")
   names(defined_flag) <- c("http", "https", "ftp")
   
@@ -55,7 +56,7 @@ fetch.config <- function(links, return.files = FALSE, destdir = normalizePath(".
       warning(sprintf("Configuration file %s is empty, please check the links.", 
         fn))
     }
-    config.tmp <- read.config(fn)
+    config.tmp <- read.config(fn, ...)
     config.final <- config.list.merge(config.final, config.tmp)
     attr(config.final, "links") <- links
   }

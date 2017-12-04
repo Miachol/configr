@@ -5,7 +5,7 @@
 \title{Fetch configuration file and generate a merged list}
 \usage{
 fetch.config(links, return.files = FALSE, destdir = normalizePath("./"),
-  keep.basename = TRUE)
+  keep.basename = TRUE, ...)
 }
 \arguments{
 \item{links}{Url or files path that need to be merged, 
@@ -19,6 +19,8 @@ default is ./}
 
 \item{keep.basename}{Whather use the links basename as the saved name 
 or use paste0(tempfile(), '_configr')}
+
+\item{...}{Extra parameters pass to \code{read.config}}
 }
 \value{
 A list or a vector
