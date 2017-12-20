@@ -61,8 +61,8 @@ read.config <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), 
 #' the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the
 #' variable does not exist and JSON/INI/YAML/TOML format only) 
 #' @param value Name of value (NULL to read all values)
-#' @param config Name of configuration to read from. Defaults to the value of 
-#' 'the R_CONFIG_ACTIVE environment variable ('default' if the variable does not exist). 
+#' @param config Name of configuration to read from. Default is the value of 
+#' 'the R_CONFIG_ACTIVE environment variable (Set to 'default' if the variable does not exist). 
 #' @param ... Arguments for \code{\link{read.config}}
 #' @seealso
 #' \code{\link{read.config}} read config by this 
@@ -95,12 +95,12 @@ eval.config <- function(value = NULL, config = Sys.getenv("R_CONFIG_ACTIVE", "de
 
 #' Get config file parameter sections
 #'
-#' @param file File name of configuration file to read from. Defaults to the value of
-#' the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the
+#' @param file File name of configuration file to read from. Default is the value of
+#' the 'R_CONFIGFILE_ACTIVE' environment variable (Set to 'config.cfg' if the
 #' variable does not exist and JSON/INI/YAML/TOML format only)
 #' @param ... Arguments for \code{\link{read.config}} 
 #' @seealso
-#' \code{\link{eval.config.merge}} which use this get all of sections of config file. 
+#' \code{\link{eval.config.merge}} use this function to get all of sections of config file. 
 #' @return a character vector including the sections infomation of configure file or
 #' logical FALSE indicating that is not standard JSON/INI/YAML/TOML format file
 #' @export

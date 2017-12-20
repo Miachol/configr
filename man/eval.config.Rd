@@ -12,8 +12,8 @@ eval.config(value = NULL, config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
 \arguments{
 \item{value}{Name of value (NULL to read all values)}
 
-\item{config}{Name of configuration to read from. Defaults to the value of 
-'the R_CONFIG_ACTIVE environment variable ('default' if the variable does not exist).}
+\item{config}{Name of configuration to read from. Default is the value of 
+'the R_CONFIG_ACTIVE environment variable (Set to 'default' if the variable does not exist).}
 
 \item{file}{File name of configuration file to read from. Defaults to the value of
 the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the

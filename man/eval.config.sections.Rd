@@ -8,8 +8,8 @@ eval.config.sections(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
   ...)
 }
 \arguments{
-\item{file}{File name of configuration file to read from. Defaults to the value of
-the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the
+\item{file}{File name of configuration file to read from. Default is the value of
+the 'R_CONFIGFILE_ACTIVE' environment variable (Set to 'config.cfg' if the
 variable does not exist and JSON/INI/YAML/TOML format only)}
 
 \item{...}{Arguments for \code{\link{read.config}}}
@@ -26,5 +26,5 @@ config.json <- system.file('extdata', 'config.json', package='configr')
 eval.config.sections(config.json)
 }
 \seealso{
-\code{\link{eval.config.merge}} which use this get all of sections of config file.
+\code{\link{eval.config.merge}} use this function to get all of sections of config file.
 }

@@ -1,4 +1,9 @@
-2017-11-28 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+2017-12-04 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* update README.md
+		* update document
+
+2017-12-04 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 
 		* fetch.config can pass paraters to read.config
 

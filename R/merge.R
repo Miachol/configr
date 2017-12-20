@@ -75,7 +75,7 @@ eval.config.merge <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.c
 #' config.list.merge(list.left, list.right)
 config.list.merge <- function(list.left = list(), list.right = list()) {
   if (!is.list(list.left) | !is.list(list.right)) {
-    warning("list.left or list.left must be list type!")
+    warning("list.left or list.right must be list type!")
   }
   list.merge(list.left, list.right)
 }
