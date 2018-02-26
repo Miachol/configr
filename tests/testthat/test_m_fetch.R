@@ -1,7 +1,7 @@
 test_that("fetch.config", {
   links <- c("https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_annovar.toml", 
-             "https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_main.toml", 
-             system.file('extdata', 'config.toml', package = "configr"))
+    "https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_main.toml", 
+    system.file("extdata", "config.toml", package = "configr"))
   x <- fetch.config(links)
   expect_that(is.list(x), equals(TRUE))
   destdir.a <- sprintf("%s/a", tempdir())

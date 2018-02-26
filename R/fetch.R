@@ -58,7 +58,9 @@ fetch.config <- function(links, return.files = FALSE, destdir = normalizePath(".
     }
     config.tmp <- read.config(fn, ...)
     config.final <- config.list.merge(config.final, config.tmp)
-    attr(config.final, "links") <- links
+    if (!is.null(config.final)) {
+      attr(config.final, "links") <- links
+    }
   }
   return(config.final)
 }

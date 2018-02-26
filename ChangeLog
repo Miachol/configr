@@ -1,3 +1,8 @@
+2018-02-26 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* prevent run attr() on NULL object 
+		* use python toml to write TOML file
+
 2017-12-04 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 
 		* update README.md

@@ -3,9 +3,13 @@ get.config.value <- function(file = "", value = NULL, config = "", config.list =
   ...) {
   if (is.null(value)) {
     config.list <- config.list[[config]]
-    attr(config.list, "config") <- config
-    attr(config.list, "configtype") <- get.config.type(file, ...)
-    attr(config.list, "file") <- normalizePath(file, "/", mustWork = FALSE)
+    if (!is.null(config.list)) {
+      attr(config.list, "config") <- config
+      attr(config.list, "configtype") <- get.config.type(file, ...)
+      attr(config.list, "file") <- normalizePath(file, "/", mustWork = FALSE)
+    } else {
+      return(NULL)
+    }
   } else {
     config.list <- config.list[[config]][[value]]
   }
@@ -145,6 +149,11 @@ write.config.list <- function(config.dat, file.path, write.type = "json", ...) {
     cat.par <- config.funs.par("cat", ...)
     cat.par <- config.list.merge(list(string.formted, file = file.path), cat.par)
     do.call(cat, cat.par)
+  } else if (write.type == "toml"){
+    inputfn <- tempfile()
+    write.config(config.dat, inputfn, write.type = "json")
+    script <- system.file("extdata", "json2toml.py", package = "configr")
+    system2(script, sprintf("-i %s -o %s", inputfn, file.path), stdout = FALSE)
   }
 }
 

@@ -39,7 +39,9 @@ eval.config.merge <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.c
       }
       config.dat <- config.list.merge(list.left = config.dat, list.right = config.tmp)
     }
-    attr(config.dat, "config") <- sections.all
+    if (!is.null(config.dat)) {
+      attr(config.dat, "config") <- sections.all
+    }
   } else {
     sections <- sections[sections %in% sections.all]
     for (i in sections) {
@@ -49,11 +51,15 @@ eval.config.merge <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.c
         names(config.tmp) <- i
       }
       config.dat <- config.list.merge(list.left = config.dat, list.right = config.tmp)
-      attr(config.dat, "config") <- sections
+      if (!is.null(config.dat)) {
+        attr(config.dat, "config") <- sections
+      }
     }
   }
-  attr(config.dat, "configtype") <- config.type
-  attr(config.dat, "file") <- file
+  if (!is.null(config.dat)) {
+    attr(config.dat, "configtype") <- config.type
+    attr(config.dat, "file") <- file
+  }
   return(config.dat)
 }
 

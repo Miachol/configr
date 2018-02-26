@@ -116,13 +116,18 @@ write.config(config.dat = list.test, file.path = out.fn,
 
 # Write YAML format configuration file
 out.fn <- sprintf("%s/test.yaml", tempdir())
-
 write.config(config.dat = list.test, file.path = out.fn, 
   write.type = "yaml")
-
 # Write YAML format configuration file with 4 indent
 write.config(config.dat = list.test, file.path = out.fn, 
   write.type = "yaml", indent = 4)
+
+# Write TOML format configuration file
+# !! You need install python and toml package
+# pip install toml
+out.fn <- sprintf("%s/test.toml", tempdir())
+write.config(config.dat = list.test, file.path = out.fn, 
+  write.type = "toml")
 
 out.fn <- sprintf("%s/test.ini", tempdir())
 

@@ -1,8 +1,8 @@
 Package: configr
 Type: Package
 Title: An Implementation of Parsing and Writing Configuration File (JSON/INI/YAML/TOML)
-Version: 0.3.2
-Authors@R: person("Jianfeng", "Li", email = "lee_jianfeng@sjtu.edu.cn", role = c("aut", "cre"))
+Version: 0.3.2.1
+Authors@R: person("Jianfeng", "Li", email = "lee_jianfeng@sjtu.edu.cn", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-2349-208X"))
 Description:
     Implements the JSON, INI, YAML and TOML parser for R setting and writing of configuration file. The functionality of this package is similar to that of package 'config'. 
 Depends:
