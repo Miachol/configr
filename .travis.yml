@@ -5,24 +5,29 @@ sudo: required
 
 cache: packages
 
-dist: trusty
+r:
+  - devel
 
-env:
-  global:
-    - _R_CHECK_FORCE_SUGGESTS_=false
+os:
+  - linux
+  - osx
 
-before_install:
-  - curl -OLs http://eddelbuettel.github.io/r-travis/run.sh && chmod 0755 run.sh
-  # optionally add our launchpad repo, but not needed here
-  # - sudo add-apt-repository -y ppa:edd/misc
-  - Rscript -e 'install.packages(c("covr", "devtools", "roxygen2", "testthat", "knitr", "glue", "jsonlite", "ini", "yaml", "RcppTOML", "prettydoc"))'
-  - ./run.sh bootstrap
-
-install:
-  - ./run.sh install_aptget r-cran-rcpp
+r_packages:
+  - covr
+  - devtools
+  - knitr
+  - roxygen2
+  - rmarkdown
+  - testthat
+  - glue
+  - jsonlite
+  - ini
+  - yaml
+  - RcppTOML
+  - prettydoc
 
 after_failure:
-  - ./run.sh dump_logs
+  - ./travis-tool.sh dump_logs
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
