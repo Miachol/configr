@@ -1,3 +1,7 @@
+2018-05-03 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* update vignettes theme
+
 2018-02-26 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 
 		* prevent run attr() on NULL object 

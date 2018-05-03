@@ -2,7 +2,13 @@
 title: "Configuration file types"
 author: "Jianfeng Li"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  prettydoc::html_pretty:
+      toc: true
+      theme: cayman
+      highlight: github
+      pdf_document:
+  toc: true
 vignette: >
   %\VignetteIndexEntry{Configuration file types}
   %\VignetteEngine{knitr::rmarkdown}
