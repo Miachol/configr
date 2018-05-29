@@ -33,7 +33,7 @@ clean:
 
 test:
 	cd .;\
-    Rscript -e "devtools::test()"
+	Rscript -e "devtools::test(reporter = 'summary')"
 
 format:
 	cd .;\

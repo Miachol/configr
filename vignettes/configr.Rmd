@@ -7,12 +7,13 @@ output:
       toc: true
       theme: cayman
       highlight: github
-      pdf_document:
-  toc: true
+  pdf_document:
+      toc: true
 vignette: >
   %\VignetteIndexEntry{Usage of configr}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, echo = FALSE}
@@ -104,7 +105,7 @@ x[c(1:5, length(x))]
 
 ```{r, echo = TRUE}
 # Convert YAML configuration file to JSON format
-out.json <- tempfile(, fileext = ".json")
+out.json <- tempfile(fileext = ".json")
 convert.config(file = config.yaml, out.file = out.json, convert.to = "JSON")
 get.config.type(out.json)
 
@@ -174,7 +175,7 @@ parse.extra(list.raw, glue.parse = TRUE, glue.flag = "!!glue")
 
 ```
 
-## Others
+## Others usage
 `config.section.del` can be used to delete a section of config, just do `config$section <- NULL`.
 
 ``` {r, echo = TRUE}
@@ -183,4 +184,12 @@ config <- read.config(file = config.json, extra.list = list(debug = "self", debu
 names(config)
 config <- config.sections.del(config, 'default')
 names(config)
+```
+
+## Session info
+
+Here is the output of `sessionInfo()` on the system on which this document was compiled:
+
+```{r echo=FALSE}
+sessionInfo()
 ```

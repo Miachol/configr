@@ -4,15 +4,16 @@ author: "Jianfeng Li"
 date: "`r Sys.Date()`"
 output:
   prettydoc::html_pretty:
-      toc: true
-      theme: cayman
-      highlight: github
-      pdf_document:
-  toc: true
+    toc: true
+    theme: cayman
+    highlight: github
+  pdf_document:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{Configuration file types}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, echo = FALSE}

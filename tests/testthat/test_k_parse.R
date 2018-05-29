@@ -2,6 +2,7 @@ config.json <- system.file("extdata", "config.json", package = "configr")
 config.yaml <- system.file("extdata", "config.yaml", package = "configr")
 config.ini <- system.file("extdata", "config.ini", package = "configr")
 config.toml <- system.file("extdata", "config.toml", package = "configr")
+config.bio <- system.file("extdata", "complex.toml", package = "configr")
 config.list <- list(ini = config.ini, json = config.json, toml = config.toml, yaml = config.yaml)
 
 test_that("parse.config", {
@@ -75,4 +76,9 @@ test_that("parse.extra glue", {
     expect_that(length(x), equals(10))
     expect_that(all(x == 1:10), equals(TRUE))
   }
+})
+
+test_that("BioInstaller parse", {
+  config <- read.config(config.bio, rcmd.parse = TRUE, glue.parse = TRUE, extra.list = list(version = 'v1.1.0'))
+  expect_that(is.list(config), equals(TRUE))
 })
