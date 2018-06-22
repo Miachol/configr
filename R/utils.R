@@ -149,7 +149,7 @@ write.config.list <- function(config.dat, file.path, write.type = "json", ...) {
     cat.par <- config.funs.par("cat", ...)
     cat.par <- config.list.merge(list(string.formted, file = file.path), cat.par)
     do.call(cat, cat.par)
-  } else if (write.type == "toml"){
+  } else if (write.type == "toml") {
     inputfn <- tempfile()
     write.config(config.dat, inputfn, write.type = "json")
     script <- system.file("extdata", "json2toml.py", package = "configr")
@@ -189,7 +189,7 @@ list.merge <- function(base.list, overlay.list, recursive = TRUE) {
 }
 
 str.extract.var <- function(text) {
-  #text <- str_extract_all(text, "\\{\\{.*\\}\\}")
+  # text <- str_extract_all(text, '\\{\\{.*\\}\\}')
   text <- str_extract_all(text, "\\{\\{[@a-zA-Z0-9_.:]*\\}\\}")
   text <- lapply(text, function(x) str_replace_all(x, "\"", ""))
   text <- lapply(text, function(x) str_replace_all(x, fixed("{{"), ""))

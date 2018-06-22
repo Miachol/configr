@@ -71,3 +71,14 @@ test_that("eval.config and eval.config.sections Exception Handling", {
   suppressWarnings(x <- eval.config.sections(file = config.error.toml))
   expect_that(x, equals(FALSE))
 })
+
+test_that("str2config", {
+  json_string <- '{"city" : "Z\\u00FCrich"}\n'
+  x <- str2config(json_string)
+  expect_that(is.list(x), equals(TRUE))
+  expect_that(names(x), equals("city"))
+  yaml_string <- 'foo: 123\n'
+  x <- str2config(yaml_string)
+  expect_that(is.list(x), equals(TRUE))
+  expect_that(names(x), equals("foo"))
+})

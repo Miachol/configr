@@ -94,6 +94,12 @@ ini.config.all <- eval.config.merge(file = config.ini)
 yaml.config.all <- eval.config.merge(file = config.yaml)
 toml.config.all <- eval.config.merge(file = config.toml)
 
+# Convert string to configuration list object
+json_string <- '{"city" : "Z\\u00FCrich"}\n'
+yaml_string <- 'foo: 123\n'
+json_config <- str2config(json_string)
+yaml_config <- str2config(yaml_string)
+
 # Read configuration files from remote sits
 links <- c('https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_annovar.toml', 
            'https://raw.githubusercontent.com/JhuangLab/BioInstaller/master/inst/extdata/config/db/db_main.toml')
@@ -184,4 +190,17 @@ expect.parsed.2 <- list(glue = expect.parsed.1, nochange = 1:10)
 
 # Delete a section in a configuration object
 config.partial <- config.sections.del(config.1, "default")
+```
+
+If you want to access external helps about configurations format or other related information,
+You can use `configr::config.help()` do this. It will return a dataframe contains all helps or open 
+a browser, such as Chrome, to access the corresponding URL.
+
+```r
+# Show all help urls stored in configr
+config.help()
+# Open the url in browser
+config.help('toml_stackoverflow_search')
+# Or use the row number to access
+config.help(23)
 ```

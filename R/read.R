@@ -119,3 +119,19 @@ eval.config.sections <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "confi
   }
   return(names(config.list))
 }
+
+#' Parse configuration string to R list object.
+#' @param text JSON, YAML, INI or TOML format string.
+#' @param ... Arguments pass to \code{\link{read.config}}
+#' @export
+#' @return List
+#' @examples
+#' json_string <- '{"city" : "Crich"}\n'
+#' yaml_string <- 'foo: 123\n'
+#' json_config <- str2config(json_string)
+#' yaml_config <- str2config(yaml_string)
+str2config <- function(text, ...) {
+  temp <- tempfile()
+  cat(text, file = temp)
+  read.config(temp, ...)
+}

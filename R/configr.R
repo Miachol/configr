@@ -28,5 +28,5 @@
 #' @docType package
 #' @name configr
 #' @import jsonlite RcppTOML yaml ini stringr glue
-#' @importFrom utils download.file
+#' @importFrom utils download.file browseURL
 NULL

@@ -175,7 +175,21 @@ parse.extra(list.raw, glue.parse = TRUE, glue.flag = "!!glue")
 
 ```
 
+## External urls about configuration format and others
+
+configr provides a function `config.help` to access external resource about various configuration format and other related materies.
+
+```r
+Show all external urls stored in configr
+config.help()
+# Open item in browser
+# config.help('toml_stackoverflow_search')
+# Or use the row number to access
+# config.help(23)
+```
+
 ## Others usage
+
 `config.section.del` can be used to delete a section of config, just do `config$section <- NULL`.
 
 ``` {r, echo = TRUE}
@@ -184,6 +198,17 @@ config <- read.config(file = config.json, extra.list = list(debug = "self", debu
 names(config)
 config <- config.sections.del(config, 'default')
 names(config)
+```
+
+`str2config` can be used to parse a string object to a configuration list
+
+```{r, echo = TRUE}
+json_string <- '{"city" : "Crich"}\n'
+yaml_string <- 'foo: 123\n'
+json_config <- str2config(json_string)
+yaml_config <- str2config(yaml_string)
+print(json_config)
+print(yaml_config)
 ```
 
 ## Session info

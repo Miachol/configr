@@ -105,7 +105,7 @@ parse.extra.config <- function(config, other.config) {
         } else {
           text.nonlist <- text
         }
-        config <- parse.extra.config.nonlist(config, list.item, text.nonlist,
+        config <- parse.extra.config.nonlist(config, list.item, text.nonlist, 
           other.config)
       }
     }
