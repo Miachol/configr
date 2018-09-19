@@ -22,7 +22,7 @@ config.help <- function(name = NULL, show_all_names = FALSE) {
   if (show_all_names && is.null(name)) {
     return(urls_names)
   } else if (!is.null(name)) {
-    if (name %in% urls_names) {
+    if (name %in% urls_names[,1]) {
       browseURL(urls[[name]])
     } else if (is.numeric(name) && name <= nrow(urls_names)) {
       browseURL(urls[[urls_names[name, 1]]])
