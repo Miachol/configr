@@ -6,11 +6,23 @@ sudo: required
 cache: packages
 
 r:
-  - devel
+  - release
+
+matrix:
+  include:
+    # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.9
+      env:
+         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
 
 os:
   - linux
-  - osx
 
 r_packages:
   - covr
@@ -25,6 +37,10 @@ r_packages:
   - yaml
   - RcppTOML
   - prettydoc
+
+before_install:
+    - eval "${MATRIX_EVAL}"
+    - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
 
 after_failure:
   - ./travis-tool.sh dump_logs
