@@ -34,7 +34,7 @@ config.funs.par <- function(fun = "", ...) {
 # Function get config.list
 get.config.list <- function(file, file.type = "json", json.file.debug = FALSE, ini.file.debug = FALSE, 
   yaml.file.debug = FALSE, toml.file.debug = FALSE, extra.list = list(), other.config = "", 
-  rcmd.parse = FALSE, bash.parse = FALSE, glue.parse = FALSE, glue.flag = "!!glue", 
+  rcmd.parse = FALSE, bash.parse = FALSE, glue.parse = FALSE, glue.flag = "!!glue", global.vars.field = "global_vars",
   ...) {
   if (file.type == "json") {
     readLines.par <- config.funs.par("readLines", ...)
@@ -122,7 +122,7 @@ get.config.list <- function(file, file.type = "json", json.file.debug = FALSE, i
     return(FALSE)
   } else {
     config.list <- parse.extra(config.list, extra.list, other.config, rcmd.parse, 
-      bash.parse, glue.parse, glue.flag)
+      bash.parse, glue.parse, glue.flag, global.vars.field)
     return(config.list)
   }
 }

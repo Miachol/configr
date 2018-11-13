@@ -1,0 +1,9 @@
+title = "Demo of global vars of configuration files"
+
+global_vars = ["gvar_1", "gvar_2"]
+gvar_1 = "G1"
+gvar_2 = "G2"
+
+[subsection]
+value_1 = "{{gvar_1}}/value_1"
+value_2 = "{{gvar_2}}/value_2"

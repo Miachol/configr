@@ -1,3 +1,7 @@
+2018-11-13 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
+
+		* add params global.vars.field
+
 2018-09-19 Li Jianfeng <lee_jianfeng@sjtu.edu.cn>
 
 		* fix failed names selectioon in config.help

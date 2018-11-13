@@ -11,6 +11,7 @@
 #' @param glue.parse Logical wheather parse '!!glue{1:5}' in config to ['1','2','3','4','5']; 
 #' ['nochange', '!!glue(1:5)', 'nochange'] => ['nochange', '1', '2', '3', '4', '5', 'nochange']
 #' @param glue.flag A character flage indicating wheater run glue() function to parse (Default is !!glue) 
+#' @param global.vars.field All vars defined in global.vars.field will as the extra.list params [gloval_var]
 #' @param file.type Default is no need to specify the variable, file.type will be automatically 
 #' identify by \code{\link{get.config.type}}. If the value be specified, the step of filetype identification will be skipped.
 #' @param ... Arguments for \code{\link{get.config.type}}, 
@@ -36,7 +37,7 @@
 #' config.extra.parsed.2 <- read.config(config.json, list(debug = 'TRUE'), other.config)
 read.config <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), extra.list = list(), 
   other.config = "", rcmd.parse = FALSE, bash.parse = FALSE, glue.parse = FALSE, 
-  glue.flag = "!!glue", file.type = NULL, ...) {
+  glue.flag = "!!glue", global.vars.field = "global_vars", file.type = NULL, ...) {
   status <- check.file.parameter(file)
   if (status == FALSE) {
     return(FALSE)
@@ -49,7 +50,7 @@ read.config <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), 
   }
   config.list <- get.config.list(file = file, file.type = file.type, extra.list = extra.list, 
     other.config = other.config, rcmd.parse = rcmd.parse, bash.parse = bash.parse, 
-    glue.parse = glue.parse, glue.flag = glue.flag, ...)
+    glue.parse = glue.parse, glue.flag = glue.flag, global.vars.field = global.vars.field, ...)
   return(config.list)
 }
 

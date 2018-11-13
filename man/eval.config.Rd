@@ -6,8 +6,9 @@
 'retreiving either a single named value or all values as a config obj which 
 have 'config', 'configtype', 'file' 'property.}
 \usage{
-eval.config(value = NULL, config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
-  file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), ...)
+eval.config(value = NULL, config = Sys.getenv("R_CONFIG_ACTIVE",
+  "default"), file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
+  ...)
 }
 \arguments{
 \item{value}{Name of value (NULL to read all values)}

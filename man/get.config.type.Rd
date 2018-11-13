@@ -4,7 +4,8 @@
 \alias{get.config.type}
 \title{Get config file type retreiving json/ini/yaml or FALSE}
 \usage{
-get.config.type(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), ...)
+get.config.type(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
+  ...)
 }
 \arguments{
 \item{file}{File name of configuration file to test. Defaults to the value of

@@ -49,6 +49,7 @@ config.json <- system.file('extdata', 'config.json', package='configr')
 config.ini <- system.file('extdata', 'config.ini', package='configr')
 config.yaml <- system.file('extdata', 'config.yaml', package='configr')
 config.toml <- system.file('extdata', 'config.toml', package='configr')
+config.glob <- system.file('extdata', 'config.global.toml', package='configr')
 
 # Check specific configuration file type
 is.json <- is.json.file(file = config.json)
@@ -187,6 +188,14 @@ list.raw <- list(glue = raw, nochange = 1:10)
 parsed <- parse.extra(list.raw, glue.parse = TRUE, glue.flag = "!!glue")
 expect.parsed.1 <- c("a", "1", "2", "3", "4", "5", "c")
 expect.parsed.2 <- list(glue = expect.parsed.1, nochange = 1:10)
+
+
+# Global vars parse (new feature in v0.3.4)
+# 
+```
+config_no_parsed_global <- read.config(config.glob, global.vars.field = NULL)
+config_parsed <- read.config(config.glob)
+```
 
 # Delete a section in a configuration object
 config.partial <- config.sections.del(config.1, "default")

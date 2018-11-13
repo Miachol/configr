@@ -32,6 +32,7 @@ config.json <- system.file('extdata', 'config.json', package='configr')
 config.ini <- system.file('extdata', 'config.ini', package='configr')
 config.yaml <- system.file('extdata', 'config.yaml', package='configr')
 config.toml <- system.file('extdata', 'config.toml', package='configr')
+config.glob <- system.file('extdata', 'config.global.toml', package='configr')
 ```
 
 ## Check the configuration file type
@@ -133,6 +134,7 @@ configr own several userful extra parse function, you can use the `parse.extra` 
 - `rcmd.parse` can be used to parse the value of `@>@str_replace('config','g$','gr')@<@` to `configr` if you setted `rcmd.parse = TRUE`.
 - `bash.parse` can be used to parse the value of `#>#echo bash#<#` to `bash` if you setted `bash.parse = TRUE`.
 - `glue.parse` can be used to paste the value of `!!glue {1:5}` to `["1", "2", "3", "4", "5"]`; `!!glue_numeric {1:5}` to [1, 2, 3, 4, 5] 
+- `global.vars.field` can be used to parse the internal values using the given top level fields default use `global_vars` (new feature in v0.3.4)
 
 **Note:** `glue.parse` using the `glue` package `glue` function to do that. Just like glue('{1:5}') and be processed by unname(unlist(x)). 
 The `!!glue` can be changed if you setted `glue.flag`. It is a remarkable fact that only contain the `glue.flag` character be parsed and the order of item will be changed if the `glue` result were multiple values. e.g. `['{a}', '!!glue {1:5}', '{{a}}']` will be parsed to `['{a}', '1', '2', '3', '4', '5', '{{a}}']`
@@ -172,6 +174,11 @@ list.raw
 expect.parsed.1 <- c("a", "1", "2", "3", "4", "5", "c")
 expect.parsed.2 <- list(glue = expect.parsed.1, nochange = 1:10)
 parse.extra(list.raw, glue.parse = TRUE, glue.flag = "!!glue")
+
+
+read.config(config.glob, global.vars.field = NULL)
+
+read.config(config.glob)
 
 ```
 

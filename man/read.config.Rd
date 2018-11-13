@@ -7,7 +7,7 @@
 read.config(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
   extra.list = list(), other.config = "", rcmd.parse = FALSE,
   bash.parse = FALSE, glue.parse = FALSE, glue.flag = "!!glue",
-  file.type = NULL, ...)
+  global.vars.field = "global_vars", file.type = NULL, ...)
 }
 \arguments{
 \item{file}{File name of configuration file to read from. Defaults to the value of
@@ -27,6 +27,8 @@ and {{debug}} will be setted to 'TRUE'}
 ['nochange', '!!glue(1:5)', 'nochange'] => ['nochange', '1', '2', '3', '4', '5', 'nochange']}
 
 \item{glue.flag}{A character flage indicating wheater run glue() function to parse (Default is !!glue)}
+
+\item{global.vars.field}{All vars defined in global.vars.field will as the extra.list params [gloval_var]}
 
 \item{file.type}{Default is no need to specify the variable, file.type will be automatically 
 identify by \code{\link{get.config.type}}. If the value be specified, the step of filetype identification will be skipped.}

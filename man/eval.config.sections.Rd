@@ -4,8 +4,8 @@
 \alias{eval.config.sections}
 \title{Get config file parameter sections}
 \usage{
-eval.config.sections(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
-  ...)
+eval.config.sections(file = Sys.getenv("R_CONFIGFILE_ACTIVE",
+  "config.cfg"), ...)
 }
 \arguments{
 \item{file}{File name of configuration file to read from. Default is the value of

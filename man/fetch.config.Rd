@@ -4,8 +4,8 @@
 \alias{fetch.config}
 \title{Fetch configuration file and generate a merged list}
 \usage{
-fetch.config(links, return.files = FALSE, destdir = normalizePath("./"),
-  keep.basename = TRUE, ...)
+fetch.config(links, return.files = FALSE,
+  destdir = normalizePath("./"), keep.basename = TRUE, ...)
 }
 \arguments{
 \item{links}{Url or files path that need to be merged, 

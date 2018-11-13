@@ -3,6 +3,7 @@ config.yaml <- system.file("extdata", "config.yaml", package = "configr")
 config.ini <- system.file("extdata", "config.ini", package = "configr")
 config.toml <- system.file("extdata", "config.toml", package = "configr")
 config.bio <- system.file("extdata", "complex.toml", package = "configr")
+config.global <- system.file("extdata", "config.global.toml", package = "configr") 
 config.list <- list(ini = config.ini, json = config.json, toml = config.toml, yaml = config.yaml)
 
 test_that("parse.config", {
@@ -76,6 +77,15 @@ test_that("parse.extra glue", {
     expect_that(length(x), equals(10))
     expect_that(all(x == 1:10), equals(TRUE))
   }
+})
+
+test_that("parse.extra global var", {
+  config <- read.config(config.global)
+  expect_that(config$subsection$value_1, equals("G1/value_1")) 
+  expect_that(config$subsection$value_2, equals("G2/value_2"))
+  config <- read.config(config.global, global.vars.field = NULL)
+  expect_that(config$subsection$value_1, equals("{{gvar_1}}/value_1")) 
+  expect_that(config$subsection$value_2, equals("{{gvar_2}}/value_2"))
 })
 
 test_that("BioInstaller parse", {

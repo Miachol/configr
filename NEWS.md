@@ -1,3 +1,7 @@
+# configr v0.3.4
+
+- new feature `global.vars.field` in parse.extra replacing global vars in configuration
+
 # configr v0.3.3
 
 - new function `str2config` to parse configuration string to R list object.

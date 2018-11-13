@@ -7,7 +7,8 @@
 #' @param bash.parse Logical wheather parse '#>#echo $HOME#<#' in config to your HOME PATH
 #' @param glue.parse Logical wheather parse '!!glue{1:5}' in config to ['1','2','3','4','5']; 
 #' ['nochange', '!!glue(1:5)', 'nochange'] => ['nochange', '1', '2', '3', '4', '5', 'nochange']
-#' @param glue.flag A character flage indicating wheater run glue() function to parse (Default is !!glue) 
+#' @param glue.flag A character flag indicating wheater run glue() function to parse (Default is !!glue) 
+#' @param global.vars.field All vars defined in global.vars.field will as the extra.list params [gloval_var]
 #' @return A list
 #' @export
 #' @examples
@@ -31,7 +32,7 @@
 #' list.raw <- list(glue = raw, nochange = 1:10)
 #' parsed <- parse.extra(list.raw, glue.parse = TRUE)
 parse.extra <- function(config, extra.list = list(), other.config = "", rcmd.parse = FALSE, 
-  bash.parse = FALSE, glue.parse = FALSE, glue.flag = "!!glue") {
+  bash.parse = FALSE, glue.parse = FALSE, glue.flag = "!!glue", global.vars.field = "global_vars") {
   if (length(config) == 0) {
     return(config)
   }
@@ -49,6 +50,9 @@ parse.extra <- function(config, extra.list = list(), other.config = "", rcmd.par
   }
   if (glue.parse) {
     config <- parse.extra.glue(config, glue.flag = glue.flag)
+  }
+  if (is.character(global.vars.field)) {
+    config <- parse.extra.global.vars(config, global.vars.field = global.vars.field)
   }
   return(config)
 }
@@ -268,6 +272,20 @@ str2multiple <- function(input = "", glue.flag = "!!glue") {
     return(parsed)
   } else {
     return(input)
+  }
+}
+
+parse.extra.global.vars <- function(config, global.vars.field = "global_vars") {
+  if (is.character(global.vars.field) && global.vars.field %in% names(config) && 
+      length(config[[global.vars.field]]) > 0) {
+    global.vars <- config[[global.vars.field]] 
+    extra.list <- paste0(global.vars, '="', unname(sapply(config[names(config) %in% global.vars],
+                     function(x){return(x)[1]})), '"', collapse = ", ")
+    extra.list <- eval(parse(text = sprintf("list(%s)", extra.list)))
+    config <- parse.extra(config, extra.list = extra.list, global.vars.field = NULL)
+    return(config) 
+  } else {
+    return(config)
   }
 }
 
