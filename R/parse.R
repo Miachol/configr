@@ -279,7 +279,7 @@ parse.extra.global.vars <- function(config, global.vars.field = "global_vars") {
   if (is.character(global.vars.field) && global.vars.field %in% names(config) && 
       length(config[[global.vars.field]]) > 0) {
     global.vars <- config[[global.vars.field]] 
-    extra.list <- paste0(global.vars, '="', unname(sapply(config[names(config) %in% global.vars],
+    extra.list <- paste0(global.vars, '="', unname(sapply(config[global.vars],
                      function(x){return(x)[1]})), '"', collapse = ", ")
     extra.list <- eval(parse(text = sprintf("list(%s)", extra.list)))
     config <- parse.extra(config, extra.list = extra.list, global.vars.field = NULL)

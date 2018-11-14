@@ -1,9 +1,13 @@
 title = "Demo of global vars of configuration files"
 
-global_vars = ["gvar_1", "gvar_2"]
+global_vars = ["gvar_1", "gvar_2", "gvar_3", "gvar_5"]
 gvar_1 = "G1"
+gvar_3 = "G3"
 gvar_2 = "G2"
+gvar_5 = "G5"
 
 [subsection]
 value_1 = "{{gvar_1}}/value_1"
 value_2 = "{{gvar_2}}/value_2"
+value_5 = "{{gvar_5}}/value_5"
+value_3 = "{{gvar_3}}/value_3"

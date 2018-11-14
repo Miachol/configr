@@ -83,6 +83,8 @@ test_that("parse.extra global var", {
   config <- read.config(config.global)
   expect_that(config$subsection$value_1, equals("G1/value_1")) 
   expect_that(config$subsection$value_2, equals("G2/value_2"))
+  expect_that(config$subsection$value_3, equals("G3/value_3"))
+  expect_that(config$subsection$value_5, equals("G5/value_5"))
   config <- read.config(config.global, global.vars.field = NULL)
   expect_that(config$subsection$value_1, equals("{{gvar_1}}/value_1")) 
   expect_that(config$subsection$value_2, equals("{{gvar_2}}/value_2"))
