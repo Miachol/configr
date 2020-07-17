@@ -4,20 +4,19 @@
 \alias{get.config.type}
 \title{Get config file type retreiving json/ini/yaml or FALSE}
 \usage{
-get.config.type(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
-  ...)
+get.config.type(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), ...)
 }
 \arguments{
 \item{file}{File name of configuration file to test. Defaults to the value of
 the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the
 variable does not exist and JSON/INI/YAML/TOML format only)}
 
-\item{...}{Arguments for \code{\link{is.json.file}}, 
-\code{\link{is.ini.file}}, \code{\link{is.yaml.file}}, 
+\item{...}{Arguments for \code{\link{is.json.file}},
+\code{\link{is.ini.file}}, \code{\link{is.yaml.file}},
 \code{\link{is.toml.file}}}
 }
 \value{
-Character json/ini/yaml/toml or 
+Character json/ini/yaml/toml or
 Logical FALSE indicating that is not standard JSON/INI/YAML/TOML format file
 }
 \description{
@@ -34,8 +33,8 @@ get.config.type(file=config.yaml)
 get.config.type(file=config.toml)
 }
 \seealso{
-\code{\link{is.json.file}}, 
-\code{\link{is.ini.file}}, 
-\code{\link{is.yaml.file}}, 
+\code{\link{is.json.file}},
+\code{\link{is.ini.file}},
+\code{\link{is.yaml.file}},
 \code{\link{is.toml.file}}
 }

@@ -67,8 +67,6 @@ eval.config.merge <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.c
 #'
 #' @param list.left One list be merged left
 #' @param list.right One list be merged right 
-#' @seealso
-#' \code{\link[config]{merge}} call in this function
 #' @return A list 
 #' @export
 #' @examples

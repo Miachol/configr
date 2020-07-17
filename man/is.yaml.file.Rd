@@ -4,8 +4,11 @@
 \alias{is.yaml.file}
 \title{Function to check wheather file is YAML format}
 \usage{
-is.yaml.file(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
-  yaml.file.debug = FALSE, ...)
+is.yaml.file(
+  file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
+  yaml.file.debug = FALSE,
+  ...
+)
 }
 \arguments{
 \item{file}{File name of configuration file to test. Defaults to the value of
@@ -35,7 +38,7 @@ print(is.yaml.file(config.ini))
 print(is.yaml.file(config.toml))
 }
 \seealso{
-\code{\link{is.json.file}}, 
-\code{\link{is.ini.file}}, 
+\code{\link{is.json.file}},
+\code{\link{is.ini.file}},
 \code{\link{is.toml.file}}
 }

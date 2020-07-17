@@ -4,8 +4,11 @@
 \alias{is.ini.file}
 \title{Function to check wheather file is INI format}
 \usage{
-is.ini.file(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
-  ini.file.debug = FALSE, ...)
+is.ini.file(
+  file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
+  ini.file.debug = FALSE,
+  ...
+)
 }
 \arguments{
 \item{file}{File name of configuration file to test. Defaults to the value of
@@ -34,7 +37,7 @@ print(is.ini.file(config.yaml))
 print(is.ini.file(config.toml))
 }
 \seealso{
-\code{\link{is.json.file}}, 
-\code{\link{is.yaml.file}}, 
+\code{\link{is.json.file}},
+\code{\link{is.yaml.file}},
 \code{\link{is.toml.file}}
 }

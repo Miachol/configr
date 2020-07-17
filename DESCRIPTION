@@ -20,7 +20,7 @@ Imports:
     stringr (>= 1.2.0),
     utils,
     glue
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Suggests: testthat,
     knitr,
     rmarkdown,
