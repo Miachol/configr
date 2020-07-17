@@ -4,8 +4,11 @@
 \alias{is.toml.file}
 \title{Function to check wheather file is TOML format}
 \usage{
-is.toml.file(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
-  toml.file.debug = FALSE, ...)
+is.toml.file(
+  file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
+  toml.file.debug = FALSE,
+  ...
+)
 }
 \arguments{
 \item{file}{File name of configuration file to test. Defaults to the value of
@@ -35,6 +38,6 @@ print(is.toml.file(config.toml))
 }
 \seealso{
 \code{\link{is.json.file}}
-\code{\link{is.ini.file}}, 
+\code{\link{is.ini.file}},
 \code{\link{is.yaml.file}}
 }

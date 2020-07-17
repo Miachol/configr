@@ -4,8 +4,11 @@
 \alias{is.json.file}
 \title{Function to check wheather file is JSON format}
 \usage{
-is.json.file(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
-  json.file.debug = FALSE, ...)
+is.json.file(
+  file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
+  json.file.debug = FALSE,
+  ...
+)
 }
 \arguments{
 \item{file}{File name of configuration file to test. Defaults to the value of
@@ -34,7 +37,7 @@ print(is.json.file(config.yaml))
 print(is.json.file(config.toml))
 }
 \seealso{
-\code{\link{is.ini.file}}, 
+\code{\link{is.ini.file}},
 \code{\link{is.yaml.file}},
 \code{\link{is.toml.file}}
 }

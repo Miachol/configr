@@ -4,8 +4,11 @@
 \alias{eval.config.merge}
 \title{Merge config parameter sets by sections.}
 \usage{
-eval.config.merge(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
-  sections = NULL, ...)
+eval.config.merge(
+  file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
+  sections = NULL,
+  ...
+)
 }
 \arguments{
 \item{file}{File name of configuration file to read from. Defaults to the value of

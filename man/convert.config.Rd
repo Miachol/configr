@@ -4,9 +4,12 @@
 \alias{convert.config}
 \title{Covert configuration file from JSON/INI/YAML/TOML to JSON/INI/YAML}
 \usage{
-convert.config(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
+convert.config(
+  file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
   out.file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
-  convert.to = "ini", ...)
+  convert.to = "ini",
+  ...
+)
 }
 \arguments{
 \item{file}{File name of configuration file to read from. Defaults to the value of

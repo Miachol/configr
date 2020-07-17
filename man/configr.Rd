@@ -3,11 +3,9 @@
 \docType{package}
 \name{configr}
 \alias{configr}
-\alias{configr-package}
-\title{configr package implements the YAML parser, 
-JSON parser, INI parser and TOML parser for R setting and writing of configuration file.}
+\title{configr package}
 \description{
-configr package implements the YAML parser, 
+Implements the YAML parser,
 JSON parser, INI parser and TOML parser for R setting and writing of configuration file.
 }
 \examples{
@@ -29,10 +27,7 @@ toml.list.update <- config.list.merge(toml.list.raw, others)
 \seealso{
 Useful links:
 
-\url{https://github.com/Miachol/configr} 
+\url{https://github.com/Miachol/configr}
 
 Report bugs at \url{https://github.com/Miachol/configr/issues}
-}
-\author{
-Li Jianfeng \url{lee_jianfeng@sjtu.edu.cn}
 }

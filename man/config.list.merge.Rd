@@ -26,6 +26,3 @@ list.left <- list(a=c(123,456))
 list.right <- list(a=c(4,5,6)) 
 config.list.merge(list.left, list.right)
 }
-\seealso{
-\code{\link[config]{merge}} call in this function
-}

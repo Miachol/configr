@@ -4,10 +4,18 @@
 \alias{read.config}
 \title{Read from the file (JSON/INI/YAML/TOML be supported), retreiving all values as a list.}
 \usage{
-read.config(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
-  extra.list = list(), other.config = "", rcmd.parse = FALSE,
-  bash.parse = FALSE, glue.parse = FALSE, glue.flag = "!!glue",
-  global.vars.field = "global_vars", file.type = NULL, ...)
+read.config(
+  file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
+  extra.list = list(),
+  other.config = "",
+  rcmd.parse = FALSE,
+  bash.parse = FALSE,
+  glue.parse = FALSE,
+  glue.flag = "!!glue",
+  global.vars.field = "global_vars",
+  file.type = NULL,
+  ...
+)
 }
 \arguments{
 \item{file}{File name of configuration file to read from. Defaults to the value of
