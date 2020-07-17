@@ -3,6 +3,7 @@ config.yaml <- system.file("extdata", "config.yaml", package = "configr")
 config.ini <- system.file("extdata", "config.ini", package = "configr")
 config.toml <- system.file("extdata", "config.toml", package = "configr")
 config.error <- system.file("extdata", "config.error.yaml", package = "configr")
+
 config.list <- list(json = config.json, yaml = config.yaml, ini = config.ini, toml = config.toml)
 
 test_that("Configtype Specificity", {
@@ -24,6 +25,8 @@ test_that("Configtype Specificity", {
       expect_that(x, equals(FALSE))
     }
   }
+  config.toml <- system.file("extdata", "config.simple.toml", package = "configr")
   x <- suppressWarnings(get.config.type(config.error))
   expect_that(x, equals(FALSE))
+  expect_that(is.toml.file(config.toml), equals(TRUE))
 })

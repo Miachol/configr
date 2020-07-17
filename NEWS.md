@@ -1,3 +1,7 @@
+# configr v0.3.5
+
+- add filename check
+
 # configr v0.3.4
 
 - new feature `global.vars.field` in parse.extra replacing global vars in configuration
