@@ -57,8 +57,8 @@ is.toml <- is.toml.file(file = config.toml)
 # Check the type of configuration file (Debug mode)
 is.json <- is.json.file(file = config.yaml, json.file.debug = T)
 is.ini <- is.ini.file(file = config.json, ini.file.debug = T)
-is.yaml <- is.yaml.file(file = config.toml, yaml.file.debug = T)
-is.toml <- is.toml.file(file = config.yaml, toml.file.debug = T)
+is.yaml <- is.yaml.file(file = config.yaml, yaml.file.debug = T)
+is.toml <- is.toml.file(file = config.toml, toml.file.debug = T)
 
 # Query the type of configuration file
 json <- get.config.type(file = config.json) 
