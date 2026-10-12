@@ -26,7 +26,6 @@
 #'others <- list(others = list(lastupdate='2017-01-07'))
 #'toml.list.update <- config.list.merge(toml.list.raw, others)
 #'
-#' @docType package
 #' @name configr
 #' @import jsonlite RcppTOML yaml ini stringr glue
 #' @importFrom utils download.file browseURL

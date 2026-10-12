@@ -2,7 +2,7 @@
 % Please edit documentation in R/configtype.R
 \name{is.toml.file}
 \alias{is.toml.file}
-\title{Function to check wheather file is TOML format}
+\title{Function to check whether file is TOML format}
 \usage{
 is.toml.file(
   file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
@@ -24,7 +24,7 @@ default is FALSE}
 Logical indicating whether the specified configuration file is TOML format
 }
 \description{
-Function to check wheather file is TOML format
+Function to check whether file is TOML format
 }
 \examples{
 config.json <- system.file('extdata', 'config.json', package='configr')

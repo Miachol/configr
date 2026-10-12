@@ -2,7 +2,7 @@
 % Please edit documentation in R/configtype.R
 \name{is.json.file}
 \alias{is.json.file}
-\title{Function to check wheather file is JSON format}
+\title{Function to check whether file is JSON format}
 \usage{
 is.json.file(
   file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
@@ -24,7 +24,7 @@ default is FALSE}
 Logical indicating whether the specified configuration file is JSON format
 }
 \description{
-Function to check wheather file is JSON format
+Function to check whether file is JSON format
 }
 \examples{
 config.json <- system.file('extdata', 'config.json', package='configr')

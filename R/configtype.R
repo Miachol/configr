@@ -1,4 +1,4 @@
-#' Function to check wheather file is JSON format
+#' Function to check whether file is JSON format
 #'
 #' @param file File name of configuration file to test. Defaults to the value of
 #' the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the
@@ -43,7 +43,7 @@ is.json.file <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
   }
 }
 
-#' Function to check wheather file is INI format
+#' Function to check whether file is INI format
 #'
 #' @param file File name of configuration file to test. Defaults to the value of
 #' the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the
@@ -88,7 +88,7 @@ is.ini.file <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"), 
   }
 }
 
-#' Function to check wheather file is YAML format
+#' Function to check whether file is YAML format
 #'
 #' @param file File name of configuration file to test. Defaults to the value of
 #' the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the
@@ -134,7 +134,7 @@ is.yaml.file <- function(file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
   }
 }
 
-#' Function to check wheather file is TOML format
+#' Function to check whether file is TOML format
 #'
 #' @param file File name of configuration file to test. Defaults to the value of
 #' the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the

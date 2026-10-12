@@ -22,17 +22,17 @@ read.config(
 the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the
 variable does not exist and JSON/INI/YAML/TOML format only)}
 
-\item{extra.list}{A list that can replace the configuration file '{{debug}}' by list(debug = 'TRUE'), 
-and {{debug}} will be setted to 'TRUE'}
+\item{extra.list}{A list that can replace the configuration file \verb{{{debug}}} by list(debug = 'TRUE'), 
+and \verb{{{debug}}} will be setted to 'TRUE'}
 
-\item{other.config}{Path of another configuration file that can replace the configuration file '{{key:value}}'}
+\item{other.config}{Path of another configuration file that can replace the configuration file \verb{{{key:value}}}}
 
-\item{rcmd.parse}{Logical wheather parse '@>@str_replace('abc', 'b', 'c')@<@' that existed in config to 'acc'}
+\item{rcmd.parse}{Logical whether parse '@>@str_replace('abc', 'b', 'c')@<@' that existed in config to 'acc'}
 
-\item{bash.parse}{Logical wheather parse '#>#echo $HOME#<#' in config to your HOME PATH}
+\item{bash.parse}{Logical whether parse '#>#echo $HOME#<#' in config to your HOME PATH}
 
-\item{glue.parse}{Logical wheather parse '!!glue{1:5}' in config to ['1','2','3','4','5']; 
-['nochange', '!!glue(1:5)', 'nochange'] => ['nochange', '1', '2', '3', '4', '5', 'nochange']}
+\item{glue.parse}{Logical whether parse \verb{'!!glue{1:5}'} in config to ['1','2','3','4','5']; 
+['nochange', \verb{'!!glue{1:5}'}, 'nochange'] => ['nochange', '1', '2', '3', '4', '5', 'nochange']}
 
 \item{glue.flag}{A character flage indicating wheater run glue() function to parse (Default is !!glue)}
 

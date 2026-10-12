@@ -2,7 +2,7 @@
 % Please edit documentation in R/configtype.R
 \name{is.yaml.file}
 \alias{is.yaml.file}
-\title{Function to check wheather file is YAML format}
+\title{Function to check whether file is YAML format}
 \usage{
 is.yaml.file(
   file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
@@ -25,7 +25,7 @@ default is FALSE}
 Logical indicating whether the specified configuration file is YAML format
 }
 \description{
-Function to check wheather file is YAML format
+Function to check whether file is YAML format
 }
 \examples{
 config.json <- system.file('extdata', 'config.json', package='configr')

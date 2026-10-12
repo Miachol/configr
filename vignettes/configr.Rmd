@@ -52,7 +52,7 @@ get.config.type(config.toml)
 
 ## Get the configuration section names
 
-Section names of configuration file can be get using `eval.config.sections`. Python package [ConfigParser](https://pypi.python.org/pypi/configparser) `sections` inspired us to add this function.
+Section names of configuration file can be get using `eval.config.sections`. Python package [ConfigParser](https://pypi.org/project/configparser/) `sections` inspired us to add this function.
 
 ```{r, echo = TRUE}
 eval.config.sections(config.ini)

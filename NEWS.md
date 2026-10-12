@@ -1,3 +1,7 @@
+# configr v0.3.6
+
+- fix RD check NOTE
+
 # configr v0.3.5
 
 - add filename check

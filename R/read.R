@@ -3,13 +3,13 @@
 #' @param file File name of configuration file to read from. Defaults to the value of
 #' the 'R_CONFIGFILE_ACTIVE' environment variable ('config.cfg' if the
 #' variable does not exist and JSON/INI/YAML/TOML format only)
-#' @param extra.list A list that can replace the configuration file '{{debug}}' by list(debug = 'TRUE'), 
-#' and {{debug}} will be setted to 'TRUE'
-#' @param other.config Path of another configuration file that can replace the configuration file '{{key:value}}' 
-#' @param rcmd.parse Logical wheather parse '@>@str_replace('abc', 'b', 'c')@<@' that existed in config to 'acc'
-#' @param bash.parse Logical wheather parse '#>#echo $HOME#<#' in config to your HOME PATH
-#' @param glue.parse Logical wheather parse '!!glue{1:5}' in config to ['1','2','3','4','5']; 
-#' ['nochange', '!!glue(1:5)', 'nochange'] => ['nochange', '1', '2', '3', '4', '5', 'nochange']
+#' @param extra.list A list that can replace the configuration file \verb{{{debug}}} by list(debug = 'TRUE'), 
+#' and \verb{{{debug}}} will be setted to 'TRUE'
+#' @param other.config Path of another configuration file that can replace the configuration file \verb{{{key:value}}} 
+#' @param rcmd.parse Logical whether parse '@>@str_replace('abc', 'b', 'c')@<@' that existed in config to 'acc'
+#' @param bash.parse Logical whether parse '#>#echo $HOME#<#' in config to your HOME PATH
+#' @param glue.parse Logical whether parse \verb{'!!glue{1:5}'} in config to ['1','2','3','4','5']; 
+#' ['nochange', \verb{'!!glue{1:5}'}, 'nochange'] => ['nochange', '1', '2', '3', '4', '5', 'nochange']
 #' @param glue.flag A character flage indicating wheater run glue() function to parse (Default is !!glue) 
 #' @param global.vars.field All vars defined in global.vars.field will as the extra.list params [gloval_var]
 #' @param file.type Default is no need to specify the variable, file.type will be automatically 

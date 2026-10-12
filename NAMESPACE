@@ -25,5 +25,7 @@ import(ini)
 import(jsonlite)
 import(stringr)
 import(yaml)
-importFrom(utils,browseURL)
-importFrom(utils,download.file)
+importFrom(utils,
+  browseURL,
+  download.file
+)

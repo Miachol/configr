@@ -1,4 +1,4 @@
-# [![Build Status](https://travis-ci.org/Miachol/configr.svg)](https://travis-ci.org/Miachol/configr) [![CRAN](http://www.r-pkg.org/badges/version/configr)](https://cran.r-project.org/package=configr) [![Downloads](http://cranlogs.r-pkg.org/badges/configr?color=brightgreen)](http://www.r-pkg.org/pkg/configr) [![codecov](https://codecov.io/github/Miachol/configr/branch/master/graphs/badge.svg)](https://codecov.io/github/Miachol/configr) 
+# [![CRAN](http://www.r-pkg.org/badges/version/configr)](https://cran.r-project.org/package=configr) [![Downloads](http://cranlogs.r-pkg.org/badges/configr?color=brightgreen)](https://www.r-pkg.org/pkg/configr) [![codecov](https://codecov.io/github/Miachol/configr/branch/master/graphs/badge.svg)](https://app.codecov.io/github/Miachol/configr) 
 
 configr package
 ==============
@@ -13,7 +13,7 @@ and '[TOML](https://CRAN.R-project.org/package=RcppTOML)' parser for R setting a
 
 The configuration file is required for several projects. It can be used to manage and set the project environment variables. The readability and maneuverability of configuration files, from INI/XML/JSON/YAML to TOML, have been improved in the past few years.  Several such parsers were created in the R language. Though it is more efficient than before, we still need to utilize different functions to parse configuration files with different formats. However, in most cases, we only just want to read it and regardless of the format. Using a single function to read or/and write such configuration files is more comfortable.
 
-[configr](https://github.com/Miachol/configr) provides a more simple way to parse and generate the diverse configuration files including JSON/INI/YAML/TOML files. The `configr` is similar to that of package '[config](https://CRAN.R-project.org/package=config)'. Vignettes can be found in [usage-of-configr](https://life2cloud.com/en/2017/07/usage-of-configr/) and [configuration-filetypes](https://life2cloud.com/en/2017/07/configuration-filetypes/).
+[configr](https://github.com/Miachol/configr) provides a more simple way to parse and generate the diverse configuration files including JSON/INI/YAML/TOML files. The `configr` is similar to that of package '[config](https://CRAN.R-project.org/package=config)'.
 
 # Installation
 

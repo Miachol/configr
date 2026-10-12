@@ -2,7 +2,7 @@
 % Please edit documentation in R/configtype.R
 \name{is.ini.file}
 \alias{is.ini.file}
-\title{Function to check wheather file is INI format}
+\title{Function to check whether file is INI format}
 \usage{
 is.ini.file(
   file = Sys.getenv("R_CONFIGFILE_ACTIVE", "config.cfg"),
@@ -24,7 +24,7 @@ default is FALSE}
 Logical indicating whether the specified configuration file is INI format
 }
 \description{
-Function to check wheather file is INI format
+Function to check whether file is INI format
 }
 \examples{
 config.json <- system.file('extdata', 'config.json', package='configr')

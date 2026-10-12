@@ -1,4 +1,4 @@
-# Check value wheather is NULL, and return a list or a value in list
+# Check value whether is NULL, and return a list or a value in list
 get.config.value <- function(file = "", value = NULL, config = "", config.list = list(), 
   ...) {
   if (is.null(value)) {
